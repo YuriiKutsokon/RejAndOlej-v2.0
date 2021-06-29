@@ -10,7 +10,7 @@ namespace RejAndOlej.Helpers.Controls
 {
     class TabPageHelepr
     {
-        private static Point _imageLocation = new Point(18, 5);
+        private static Point _imageLocation = new Point(18, 3);
 
         private static Image _closeImage = new Bitmap(RejAndOlej.Properties.Resources.close_Icon_16);
 
@@ -22,7 +22,7 @@ namespace RejAndOlej.Helpers.Controls
         public static void createTabCloseButton(TabControl tabControl, System.Windows.Forms.DrawItemEventArgs e)
         {
             Rectangle rect = tabControl.GetTabRect(e.Index);
-            rect.Offset(2, 0);
+            rect.Offset(2,0);
             Brush TitleBrush = new SolidBrush(Color.Black);
             Font f = tabControl.Font;
             string title = tabControl.TabPages[e.Index].Text;

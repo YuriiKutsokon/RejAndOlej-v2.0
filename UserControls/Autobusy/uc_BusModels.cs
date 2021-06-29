@@ -14,9 +14,9 @@ using System.Windows.Forms;
 
 namespace RejAndOlej.UserControls.Autobusy
 {
-    public partial class uc_BusModels : UserControl
+    public partial class uc_BusModels : BaseUserControl
     {
-        public uc_BusModels()
+        public uc_BusModels() : base("ModelName")
         {
             InitializeComponent();
             initDataGrid();
@@ -26,9 +26,11 @@ namespace RejAndOlej.UserControls.Autobusy
 
         private void RegisterEvents()
         {
-            dataGridViewModelsList.RowStateChanged += (s, e) => initManipulationControls();
+            dataGridViewModelsList.RowStateChanged += (s, e) => initManipulationControls((int)DBTableActions.Edit);
+            dataGridViewModelsList.CellStateChanged += (s, e) => initManipulationControls((int)DBTableActions.Edit);
 
-            dataGridViewModelsList.CellStateChanged += (s, e) => initManipulationControls();
+            toolStripButtonEdit.Click += (s, e) => SetEditMode();
+            dataGridViewModelsList.DoubleClick += (s, e) => SetEditMode();
         }
 
         private void initComboBox()
@@ -51,18 +53,7 @@ namespace RejAndOlej.UserControls.Autobusy
         {
             groupBoxDataManipulation.Enabled = true;
             DBAction = (int)DBTableActions.Insert;
-        }
-
-        private void toolStripButtonEdit_Click(object sender, EventArgs e)
-        {
-            groupBoxDataManipulation.Enabled = true;
-            DBAction = (int)DBTableActions.Edit;
-        }
-
-        private void dataGridViewModelsList_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            groupBoxDataManipulation.Enabled = true;
-            DBAction = (int)DBTableActions.Edit;
+            initManipulationControls(DBAction);
         }
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
@@ -71,9 +62,8 @@ namespace RejAndOlej.UserControls.Autobusy
             {
                 if (DBAction == (int)DBTableActions.Edit)
                 {
-                    Bus rowToEdit = GridViewHelper.GetObjectFromDataGridViewRow<Bus>(dataGridViewModelsList, "ModelName");
-                    if (!(String.IsNullOrEmpty(textBoxName.Text) && String.IsNullOrEmpty(textBoxDaysToCheck.Text) &&
-                        String.IsNullOrEmpty(textBoxKmToOilCheck.Text) && String.IsNullOrEmpty(comboBoxBusMaker.Text)))
+                    Bus rowToEdit = GridViewHelper.GetObjectFromDataGridViewRow<Bus>(dataGridViewModelsList, SelectionColumn);
+                    if (!HasEmptyControl(groupBoxDataManipulation.Controls))
                     {
                         using (RejAndOlejContext tempContext = new RejAndOlejContext())
                         {
@@ -90,8 +80,7 @@ namespace RejAndOlej.UserControls.Autobusy
                 }
                 else if (DBAction == (int)DBTableActions.Insert)
                 {
-                    if (!(String.IsNullOrEmpty(textBoxName.Text) && String.IsNullOrEmpty(textBoxDaysToCheck.Text) &&
-                        String.IsNullOrEmpty(textBoxKmToOilCheck.Text) && String.IsNullOrEmpty(comboBoxBusMaker.Text)))
+                    if (!HasEmptyControl(groupBoxDataManipulation.Controls))
                     {
                         Bus rowToInsert = new Bus();
 
@@ -114,24 +103,56 @@ namespace RejAndOlej.UserControls.Autobusy
             }
         }
 
-        private void initManipulationControls()
+        private void initManipulationControls(int? mode)
         {
-            Bus bus = GridViewHelper.GetObjectFromDataGridViewRow<Bus>(dataGridViewModelsList,"ModelName");
-
-            if (bus != null && bus.BusId != 0)
+            Bus bus = GridViewHelper.GetObjectFromDataGridViewRow<Bus>(dataGridViewModelsList,SelectionColumn);
+            switch (mode)
             {
-                textBoxName.Text = bus.ModelName;
-                textBoxDaysToCheck.Text = Convert.ToString(bus.DefaultDaysToRegistrationReview);
-                textBoxKmToOilCheck.Text = Convert.ToString(bus.DefaultKmToOilInspection);
-                comboBoxBusMaker.Text = bus.BusMaker.Name;
+                case (int)DBTableActions.Edit:
+                    if (bus != null && bus.BusId != 0)
+                    {
+                        textBoxName.Text = bus.ModelName;
+                        textBoxDaysToCheck.Text = Convert.ToString(bus.DefaultDaysToRegistrationReview);
+                        textBoxKmToOilCheck.Text = Convert.ToString(bus.DefaultKmToOilInspection);
+                        comboBoxBusMaker.Text = bus.BusMaker.Name;
+                    }
+                    break;
+                case (int)DBTableActions.Insert:
+
+                        textBoxName.Text = string.Empty;
+                        textBoxDaysToCheck.Text = string.Empty;
+                        textBoxKmToOilCheck.Text = string.Empty;
+                        comboBoxBusMaker.Text = string.Empty;
+
+                    break;
+                default:
+
+                    break;
             }
+
         }
 
         private void SetEditMode()
         {
             groupBoxDataManipulation.Enabled = true;
             DBAction = (int)DBTableActions.Edit;
-            initManipulationControls();
+            initManipulationControls(DBAction);
+        }
+
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            using (RejAndOlejContext tempContext = new RejAndOlejContext())
+            {
+                if (dataGridViewModelsList.SelectedCells.Count > 0 || dataGridViewModelsList.SelectedRows.Count > 0)
+                {
+                    Bus rowToDelete = GridViewHelper.GetObjectFromDataGridViewRow<Bus>(dataGridViewModelsList, SelectionColumn);
+                    tempContext.Buses.Remove(rowToDelete);
+                    tempContext.SaveChanges();
+                    initDataGrid();
+                }
+                else
+                    MessageBox.Show("Proszę wybrać pojazd do usunięcia", "Brak Danych do usunięcia");
+            }
         }
     }
 }

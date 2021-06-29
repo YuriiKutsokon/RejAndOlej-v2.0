@@ -54,13 +54,13 @@ namespace RejAndOlej.UserControls.Autobusy
             // dataGridViewModelsList
             // 
             this.dataGridViewModelsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewModelsList.Location = new System.Drawing.Point(2, 252);
+            this.dataGridViewModelsList.Location = new System.Drawing.Point(2, 189);
+            this.dataGridViewModelsList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewModelsList.Name = "dataGridViewModelsList";
             this.dataGridViewModelsList.RowHeadersWidth = 51;
             this.dataGridViewModelsList.RowTemplate.Height = 29;
-            this.dataGridViewModelsList.Size = new System.Drawing.Size(1039, 609);
+            this.dataGridViewModelsList.Size = new System.Drawing.Size(909, 457);
             this.dataGridViewModelsList.TabIndex = 2;
-            this.dataGridViewModelsList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewModelsList_CellContentClick);
             // 
             // groupBoxDataManipulation
             // 
@@ -73,9 +73,11 @@ namespace RejAndOlej.UserControls.Autobusy
             this.groupBoxDataManipulation.Controls.Add(this.textBoxDaysToCheck);
             this.groupBoxDataManipulation.Controls.Add(this.textBoxName);
             this.groupBoxDataManipulation.Enabled = false;
-            this.groupBoxDataManipulation.Location = new System.Drawing.Point(137, 55);
+            this.groupBoxDataManipulation.Location = new System.Drawing.Point(120, 41);
+            this.groupBoxDataManipulation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxDataManipulation.Name = "groupBoxDataManipulation";
-            this.groupBoxDataManipulation.Size = new System.Drawing.Size(729, 191);
+            this.groupBoxDataManipulation.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxDataManipulation.Size = new System.Drawing.Size(638, 143);
             this.groupBoxDataManipulation.TabIndex = 8;
             this.groupBoxDataManipulation.TabStop = false;
             this.groupBoxDataManipulation.Text = "Edytuj Model Autobusu";
@@ -83,66 +85,70 @@ namespace RejAndOlej.UserControls.Autobusy
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(414, 129);
+            this.label4.Location = new System.Drawing.Point(362, 97);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(281, 20);
+            this.label4.Size = new System.Drawing.Size(224, 15);
             this.label4.TabIndex = 9;
             this.label4.Text = "Domyślny krok przeglądu Olejowego, km";
             // 
             // comboBoxBusMaker
             // 
             this.comboBoxBusMaker.FormattingEnabled = true;
-            this.comboBoxBusMaker.Location = new System.Drawing.Point(27, 152);
+            this.comboBoxBusMaker.Location = new System.Drawing.Point(24, 114);
+            this.comboBoxBusMaker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxBusMaker.Name = "comboBoxBusMaker";
-            this.comboBoxBusMaker.Size = new System.Drawing.Size(288, 28);
+            this.comboBoxBusMaker.Size = new System.Drawing.Size(252, 23);
             this.comboBoxBusMaker.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(123, 129);
+            this.label3.Location = new System.Drawing.Point(108, 97);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 20);
+            this.label3.Size = new System.Drawing.Size(62, 15);
             this.label3.TabIndex = 8;
             this.label3.Text = "Producent";
             // 
             // textBoxKmToOilCheck
             // 
-            this.textBoxKmToOilCheck.Location = new System.Drawing.Point(414, 152);
+            this.textBoxKmToOilCheck.Location = new System.Drawing.Point(362, 114);
+            this.textBoxKmToOilCheck.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxKmToOilCheck.Name = "textBoxKmToOilCheck";
-            this.textBoxKmToOilCheck.Size = new System.Drawing.Size(288, 27);
+            this.textBoxKmToOilCheck.Size = new System.Drawing.Size(252, 23);
             this.textBoxKmToOilCheck.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(454, 55);
+            this.label2.Location = new System.Drawing.Point(397, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(215, 20);
+            this.label2.Size = new System.Drawing.Size(170, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "Zakres przeglądu technicznego";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(133, 56);
+            this.label1.Location = new System.Drawing.Point(116, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 20);
+            this.label1.Size = new System.Drawing.Size(42, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "Nazwa";
             // 
             // textBoxDaysToCheck
             // 
-            this.textBoxDaysToCheck.Location = new System.Drawing.Point(414, 78);
+            this.textBoxDaysToCheck.Location = new System.Drawing.Point(362, 58);
+            this.textBoxDaysToCheck.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxDaysToCheck.Name = "textBoxDaysToCheck";
-            this.textBoxDaysToCheck.Size = new System.Drawing.Size(288, 27);
+            this.textBoxDaysToCheck.Size = new System.Drawing.Size(252, 23);
             this.textBoxDaysToCheck.TabIndex = 1;
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(27, 78);
+            this.textBoxName.Location = new System.Drawing.Point(24, 58);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(288, 27);
+            this.textBoxName.Size = new System.Drawing.Size(252, 23);
             this.textBoxName.TabIndex = 0;
             // 
             // toolStrip1
@@ -155,7 +161,7 @@ namespace RejAndOlej.UserControls.Autobusy
             this.toolStripButtonDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1044, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(909, 27);
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -165,7 +171,7 @@ namespace RejAndOlej.UserControls.Autobusy
             this.toolStripButtonAdd.Image = global::RejAndOlej.Properties.Resources.Add_256;
             this.toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAdd.Name = "toolStripButtonAdd";
-            this.toolStripButtonAdd.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonAdd.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAdd.Text = "Dodaj";
             this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
             // 
@@ -175,9 +181,8 @@ namespace RejAndOlej.UserControls.Autobusy
             this.toolStripButtonEdit.Image = global::RejAndOlej.Properties.Resources.Edit_256;
             this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonEdit.Name = "toolStripButtonEdit";
-            this.toolStripButtonEdit.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonEdit.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonEdit.Text = "toolStripButton5";
-            this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
             // 
             // toolStripButtonSave
             // 
@@ -185,7 +190,7 @@ namespace RejAndOlej.UserControls.Autobusy
             this.toolStripButtonSave.Image = global::RejAndOlej.Properties.Resources.Save_256;
             this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSave.Name = "toolStripButtonSave";
-            this.toolStripButtonSave.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonSave.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonSave.Text = "toolStripButton6";
             this.toolStripButtonSave.Click += new System.EventHandler(this.toolStripButtonSave_Click);
             // 
@@ -195,19 +200,23 @@ namespace RejAndOlej.UserControls.Autobusy
             this.toolStripButtonDelete.Image = global::RejAndOlej.Properties.Resources.Delete_256;
             this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDelete.Name = "toolStripButtonDelete";
-            this.toolStripButtonDelete.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonDelete.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonDelete.Text = "toolStripButton7";
+            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
-            // ucr_BusModels
+            // uc_BusModels
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBoxDataManipulation);
             this.Controls.Add(this.dataGridViewModelsList);
-            this.Name = "ucr_BusModels";
-            this.Size = new System.Drawing.Size(1044, 864);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(909, 487);
+            this.MinimumSize = new System.Drawing.Size(909, 487);
+            this.Name = "uc_BusModels";
+            this.Size = new System.Drawing.Size(909, 487);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewModelsList)).EndInit();
             this.groupBoxDataManipulation.ResumeLayout(false);
             this.groupBoxDataManipulation.PerformLayout();

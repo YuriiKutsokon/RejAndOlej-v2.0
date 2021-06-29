@@ -51,15 +51,13 @@ namespace RejAndOlej.UserControls.Flota
                     }
                 break;
                 case (int)DBTableActions.Insert:
-                    if (vehicle != null && vehicle.FleetVehicleId != 0)
-                    {
+
                         textBoxRegNum.Text = string.Empty;
                         textBoxracNumber.Text = string.Empty;
                         textBoxMileage.Text = string.Empty;
                         comboBoxBusMaker.Text = string.Empty;
                         comboBoxBusMakerModels.Text = string.Empty;
                         dateTimeEnterToFleet.Value = DateTime.Now;
-                    }
                 break;
                 default:
 

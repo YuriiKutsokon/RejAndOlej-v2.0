@@ -10,15 +10,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RejAndOlej.Views.TableViews;
+using RejAndOlej.Helpers.Controls;
 
 namespace RejAndOlej.UserControls.Autobusy
 {
-    public partial class uc_BusMakers : UserControl
+    public partial class uc_BusMakers : BaseUserControl
     {
-        public uc_BusMakers()
+        public uc_BusMakers() :base("Name")
         {
             InitializeComponent();
             initDataGrid();
+            RegisterEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            dataGridViewBusMakersList.RowStateChanged += (s, e) => initManipulationControls((int)DBTableActions.Edit);
+            dataGridViewBusMakersList.CellStateChanged += (s, e) => initManipulationControls((int)DBTableActions.Edit);
+
+            toolStripButtonEdit.Click += (s, e) => SetEditMode();
+            dataGridViewBusMakersList.DoubleClick += (s, e) => SetEditMode();
         }
 
 
@@ -29,20 +40,54 @@ namespace RejAndOlej.UserControls.Autobusy
             dataGridViewBusMakersList.DataSource = view;
         }
 
-        private void buttonNewBusmaker_Click(object sender, EventArgs e)
+        private void SetEditMode()
+        {
+            groupBoxDataManipulation.Enabled = true;
+            DBAction = (int)DBTableActions.Edit;
+            initManipulationControls(DBAction);
+        }
+
+        private void initManipulationControls(int? mode)
+        {
+            BusMaker busMaker = GridViewHelper.GetObjectFromDataGridViewRow<BusMaker>(dataGridViewBusMakersList, SelectionColumn);
+
+            switch (mode)
+            {
+                case (int)DBTableActions.Edit:
+                    textBoxName.Text = busMaker.Name;
+                    textBoxNation.Text = busMaker.Nation;
+                    break;
+
+                case (int)DBTableActions.Insert:
+                    textBoxName.Text = string.Empty;
+                    textBoxNation.Text = string.Empty;
+                    break;
+            }
+
+        }
+
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
             groupBoxDataManipulation.Enabled = true;
             DBAction = (int)DBTableActions.Insert;
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            BusMaker rowToDelete = GridViewHelper.GetObjectFromDataGridViewRow<BusMaker>(dataGridViewBusMakersList, SelectionColumn);
+            context.BusMakers.Remove(rowToDelete);
+            context.SaveChanges();
+            initDataGrid();
+        }
+
+        private void toolStripButtonSave_Click(object sender, EventArgs e)
         {
             if (DBAction != null)
             {
                 if (DBAction == (int)DBTableActions.Edit)
                 {
-                    BusMaker rowToEdit = context.BusMakers.Where(bm => bm.BusMakerId == dataGridViewBusMakersList.CurrentCell.RowIndex).FirstOrDefault();
-                    if (textBoxName.Text != "" && textBoxNation.Text != "")
+                    BusMaker rowToEdit = GridViewHelper.GetObjectFromDataGridViewRow<BusMaker>(dataGridViewBusMakersList, SelectionColumn);
+                    if (!HasEmptyControl(groupBoxDataManipulation.Controls))
                     {
                         rowToEdit.Name = textBoxName.Text;
                         rowToEdit.Nation = textBoxNation.Text;
@@ -54,7 +99,7 @@ namespace RejAndOlej.UserControls.Autobusy
                 }
                 else if (DBAction == (int)DBTableActions.Insert)
                 {
-                    if (textBoxName.Text != "" && textBoxNation.Text != "")
+                    if (!HasEmptyControl(groupBoxDataManipulation.Controls))
                     {
                         BusMaker rowToInsert = new BusMaker()
                         {
@@ -70,20 +115,6 @@ namespace RejAndOlej.UserControls.Autobusy
                         MessageBox.Show("Brak danych do wprowadzenia", "brak danych");
                 }
             }
-        }
-
-        private void dataGridViewBusMakersList_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            groupBoxDataManipulation.Enabled = true;
-            DBAction = (int)DBTableActions.Edit;
-        }
-
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            BusMaker rowToDelete = context.BusMakers.Where(bm => bm.BusMakerId == dataGridViewBusMakersList.CurrentCell.RowIndex).FirstOrDefault();
-            context.BusMakers.Remove(rowToDelete);
-            context.SaveChanges();
-            initDataGrid();
         }
     }
 }

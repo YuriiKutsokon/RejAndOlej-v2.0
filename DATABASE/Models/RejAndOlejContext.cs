@@ -27,7 +27,7 @@ namespace RejAndOlej.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-KJG8KIQ\\SQLEXPRESS;Database=RejAndOlej;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=PL01-PC04\\SQLEXPRESS01;Database=RejAndOlej;Trusted_Connection=True;");
             }
         }
 

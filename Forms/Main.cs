@@ -27,6 +27,7 @@ namespace RejAndOlej
             menuItemBusMakers.Click += (s, e) => CreateTabPage(menuItemBusMakers);
             menuItemBusModels.Click += (s, e) => CreateTabPage(menuItemBusModels);
             menuItemListaPojazdow.Click += (s, e) => CreateTabPage(menuItemListaPojazdow);
+            menuItemPrzegladyOlejowe.Click += (s, e) => CreateTabPage(menuItemPrzegladyOlejowe);
         }
 
         private void CreateTabPage(ToolStripMenuItem item)
@@ -51,6 +52,10 @@ namespace RejAndOlej
                         userControl = new uc_Fleet();
                         openTabsTags.Add(item.Tag);
                         break;
+                    case "OilChecks":
+                        userControl = new uc_OilChecks();
+                        openTabsTags.Add(item.Tag);
+                        break;
                 }
 
                 userControl.Dock = DockStyle.Fill;
@@ -60,45 +65,12 @@ namespace RejAndOlej
                 tabControlInnerForms.SelectTab(tabPage);
             }
             else
-                TabPageHelepr.SelectOpenTab(tabControlInnerForms, item.Tag);
-        }
-
-        private void menuItemBusModels_Click(object sender, EventArgs e)
-        {
-            uc_BusModels bmControl = new uc_BusModels();
-            bmControl.Dock = DockStyle.Fill;
-            TabPage tabPageBusModels = new TabPage();
-            tabPageBusModels.Text = "Modele Autobusów";
-            tabPageBusModels.Controls.Add(bmControl);
-            tabControlInnerForms.TabPages.Add(tabPageBusModels);
-            tabControlInnerForms.SelectTab(tabPageBusModels);
-        }
-
-        private void menuItemFlota_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void menuItemListaPojazdow_Click(object sender, EventArgs e)
-        {
-            uc_Fleet fleetControl = new uc_Fleet();
-            fleetControl.Dock = DockStyle.Fill;
-            TabPage tabPageFleet = new TabPage();
-            tabPageFleet.Text = "Flota";
-            tabPageFleet.Controls.Add(fleetControl);
-            tabControlInnerForms.TabPages.Add(tabPageFleet);
-            tabControlInnerForms.SelectTab(tabPageFleet);
+                TabPageHelepr.SelectOpenedTab(tabControlInnerForms, item.Tag);
         }
 
         private void tabControlInnerForms_DrawItem(object sender, DrawItemEventArgs e)
         {
             TabPageHelepr.createTabCloseButton(tabControlInnerForms, e);
-        }
-
-        private void tabControlInnerForms_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void Main_Load(object sender, EventArgs e)

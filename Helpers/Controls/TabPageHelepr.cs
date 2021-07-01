@@ -34,7 +34,7 @@ namespace RejAndOlej.Helpers.Controls
             }
         }
 
-        public static void SelectOpenTab(TabControl control, object tag)
+        public static void SelectOpenedTab(TabControl control, object tag)
         {
             foreach(TabPage page in control.TabPages)
             {

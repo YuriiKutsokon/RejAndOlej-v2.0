@@ -12,7 +12,9 @@ namespace RejAndOlej.Helpers.Controls
     {
         RejAndOlejModelsBus,
         RejAndOlejModelsBusMaker,
-        RejAndOlejModelsBusFleet
+        RejAndOlejModelsBusFleet,
+        RejAndOlejModelsOilCheck,
+        RejAndOlejModelsRegistrationCheck
     }
 
     class GridViewHelper
@@ -25,6 +27,20 @@ namespace RejAndOlej.Helpers.Controls
             {
                 switch (type)
                 {
+                    case nameof(ModelTypes.RejAndOlejModelsBusMaker):
+                        returnObj = new BusMaker();
+                        if (sender.SelectedRows != null && sender.SelectedRows.Count != 0)
+                        {
+                            returnObj = context.BusMakers.Where(b => b.Name ==
+                                Convert.ToString(sender.SelectedRows[0].Cells[searchingColumnName].Value)).FirstOrDefault();
+                        }
+                        else if (sender.SelectedCells != null && sender.SelectedCells.Count != 0)
+                        {
+                            returnObj = context.BusMakers.Where(b => b.Name ==
+                                Convert.ToString(sender.SelectedCells[0].OwningRow.Cells[searchingColumnName].Value)).FirstOrDefault();
+                        }
+                        break;
+
                     case nameof(ModelTypes.RejAndOlejModelsBus):
                         returnObj = new Bus();
                         if (sender.SelectedRows != null && sender.SelectedRows.Count != 0)
@@ -54,6 +70,38 @@ namespace RejAndOlej.Helpers.Controls
                                 Convert.ToString(sender.SelectedCells[0].OwningRow.Cells[searchingColumnName].Value)).FirstOrDefault();
                         }
                     break;
+
+                    case nameof(ModelTypes.RejAndOlejModelsOilCheck):
+                        returnObj = new OilCheck();
+                        if (sender.SelectedRows != null && sender.SelectedRows.Count != 0)
+                        {
+                            returnObj = context.OilChecks
+                                .Where(v => v.FleetVechicleId ==
+                                Convert.ToInt64(sender.SelectedRows[0].Cells[searchingColumnName].Value)).FirstOrDefault();
+                        }
+                        else if (sender.SelectedCells != null && sender.SelectedCells.Count != 0)
+                        {
+                            returnObj = context.OilChecks
+                                .Where(v => v.FleetVechicleId ==
+                                Convert.ToInt64(sender.SelectedCells[0].OwningRow.Cells[searchingColumnName].Value)).FirstOrDefault();
+                        }
+                        break;
+
+                    case nameof(ModelTypes.RejAndOlejModelsRegistrationCheck):
+                        returnObj = new RegistrationCheck();
+                        if (sender.SelectedRows != null && sender.SelectedRows.Count != 0)
+                        {
+                            returnObj = context.RegistrationChecks
+                                .Where(v => v.FleetVehicleId ==
+                                Convert.ToInt64(sender.SelectedRows[0].Cells[searchingColumnName].Value)).FirstOrDefault();
+                        }
+                        else if (sender.SelectedCells != null && sender.SelectedCells.Count != 0)
+                        {
+                            returnObj = context.RegistrationChecks
+                                .Where(v => v.FleetVehicleId ==
+                                Convert.ToInt64(sender.SelectedCells[0].OwningRow.Cells[searchingColumnName].Value)).FirstOrDefault();
+                        }
+                        break;
                 }
 
             }

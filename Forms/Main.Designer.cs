@@ -55,8 +55,9 @@ namespace RejAndOlej
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.MdiWindowListItem = this.tmenuItemAutobusy;
             this.mainMenuStrip.Name = "mainMenuStrip";
+            this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
             this.mainMenuStrip.ShowItemToolTips = true;
-            this.mainMenuStrip.Size = new System.Drawing.Size(1348, 28);
+            this.mainMenuStrip.Size = new System.Drawing.Size(1180, 23);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "MainMenu";
             // 
@@ -67,21 +68,21 @@ namespace RejAndOlej
             this.menuItemBusMakers,
             this.menuItemBusModels});
             this.tmenuItemAutobusy.Name = "tmenuItemAutobusy";
-            this.tmenuItemAutobusy.Size = new System.Drawing.Size(85, 24);
+            this.tmenuItemAutobusy.Size = new System.Drawing.Size(70, 19);
             this.tmenuItemAutobusy.Text = "Autobusy";
             // 
             // menuItemBusMakers
             // 
             this.menuItemBusMakers.CheckOnClick = true;
             this.menuItemBusMakers.Name = "menuItemBusMakers";
-            this.menuItemBusMakers.Size = new System.Drawing.Size(165, 26);
+            this.menuItemBusMakers.Size = new System.Drawing.Size(134, 22);
             this.menuItemBusMakers.Tag = "BusMakers";
             this.menuItemBusMakers.Text = "Producenci";
             // 
             // menuItemBusModels
             // 
             this.menuItemBusModels.Name = "menuItemBusModels";
-            this.menuItemBusModels.Size = new System.Drawing.Size(165, 26);
+            this.menuItemBusModels.Size = new System.Drawing.Size(134, 22);
             this.menuItemBusModels.Tag = "BusModels";
             this.menuItemBusModels.Text = "Modele";
             // 
@@ -92,52 +93,52 @@ namespace RejAndOlej
             this.menuItemPrzegladyRejestracyjne,
             this.menuItemPrzegladyOlejowe});
             this.menuItemFlota.Name = "menuItemFlota";
-            this.menuItemFlota.Size = new System.Drawing.Size(56, 24);
+            this.menuItemFlota.Size = new System.Drawing.Size(45, 19);
             this.menuItemFlota.Text = "Flota";
-            this.menuItemFlota.Click += new System.EventHandler(this.menuItemFlota_Click);
             // 
             // menuItemListaPojazdow
             // 
             this.menuItemListaPojazdow.Name = "menuItemListaPojazdow";
-            this.menuItemListaPojazdow.Size = new System.Drawing.Size(248, 26);
+            this.menuItemListaPojazdow.Size = new System.Drawing.Size(197, 22);
             this.menuItemListaPojazdow.Tag = "Fleet";
             this.menuItemListaPojazdow.Text = "ListaPojazdów";
             // 
             // menuItemPrzegladyRejestracyjne
             // 
             this.menuItemPrzegladyRejestracyjne.Name = "menuItemPrzegladyRejestracyjne";
-            this.menuItemPrzegladyRejestracyjne.Size = new System.Drawing.Size(248, 26);
+            this.menuItemPrzegladyRejestracyjne.Size = new System.Drawing.Size(197, 22);
             this.menuItemPrzegladyRejestracyjne.Tag = "RegistrationChecks";
             this.menuItemPrzegladyRejestracyjne.Text = "Przeglądy Rejestracyjne";
             // 
             // menuItemPrzegladyOlejowe
             // 
             this.menuItemPrzegladyOlejowe.Name = "menuItemPrzegladyOlejowe";
-            this.menuItemPrzegladyOlejowe.Size = new System.Drawing.Size(248, 26);
+            this.menuItemPrzegladyOlejowe.Size = new System.Drawing.Size(197, 22);
             this.menuItemPrzegladyOlejowe.Tag = "OilChecks";
             this.menuItemPrzegladyOlejowe.Text = "Przeglądy Olejowe";
             // 
             // tabControlInnerForms
             // 
-            this.tabControlInnerForms.Location = new System.Drawing.Point(309, 31);
-            this.tabControlInnerForms.MaximumSize = new System.Drawing.Size(1039, 649);
-            this.tabControlInnerForms.MinimumSize = new System.Drawing.Size(1039, 649);
+            this.tabControlInnerForms.Location = new System.Drawing.Point(270, 23);
+            this.tabControlInnerForms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabControlInnerForms.MaximumSize = new System.Drawing.Size(909, 487);
+            this.tabControlInnerForms.MinimumSize = new System.Drawing.Size(909, 487);
             this.tabControlInnerForms.Name = "tabControlInnerForms";
             this.tabControlInnerForms.SelectedIndex = 0;
-            this.tabControlInnerForms.Size = new System.Drawing.Size(1039, 649);
+            this.tabControlInnerForms.Size = new System.Drawing.Size(909, 487);
             this.tabControlInnerForms.TabIndex = 2;
             this.tabControlInnerForms.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlInnerForms_DrawItem);
-            this.tabControlInnerForms.Click += new System.EventHandler(this.tabControlInnerForms_Click);
             this.tabControlInnerForms.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControlInnerForms_MouseClick);
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1348, 681);
+            this.ClientSize = new System.Drawing.Size(1180, 511);
             this.Controls.Add(this.tabControlInnerForms);
             this.Controls.Add(this.mainMenuStrip);
             this.MainMenuStrip = this.mainMenuStrip;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Main";
             this.Text = "RejAndOlej";
             this.Load += new System.EventHandler(this.Main_Load);

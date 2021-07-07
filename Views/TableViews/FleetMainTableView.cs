@@ -31,8 +31,8 @@ namespace RejAndOlej.Views.TableViews
             Mileage = fleet.Mileage;
             DateOfEnterToFleet = fleet.DateOfEnterToFleet;
             BusModel = fleet.Bus.BusMaker.Name + " " + fleet.Bus.ModelName;
-            LastOilCheckDate = fleet.OilChecks.Last().DateOfOilCheck;
-            MileageOnOilCheck = fleet.OilChecks.Last().MileageOnOilCheck;
+            //LastOilCheckDate = fleet.OilChecks.Last().DateOfOilCheck;
+            //MileageOnOilCheck = fleet.OilChecks.Last().MileageOnOilCheck;
         }
 
         public static ICollection<FleetMainTableView> GetFleetView(ICollection<BusFleet> fleet)

@@ -30,7 +30,7 @@ namespace RejAndOlej.Forms.Tables
         {
             BusFleet rowToExport = null;
 
-            if (dataGridViewFleetList.SelectedRows.Count == 1)
+            if (dataGridViewFleetList.SelectedRows.Count == 1 || dataGridViewFleetList.SelectedCells.Count == 1)
                 rowToExport = GridViewHelper.GetObjectFromDataGridViewRow<BusFleet>(dataGridViewFleetList, "RegistrationNumber");
             else
                 MessageBox.Show("Wybierz jeden pojazd");

@@ -28,6 +28,7 @@ namespace RejAndOlej
             menuItemBusModels.Click += (s, e) => CreateTabPage(menuItemBusModels);
             menuItemListaPojazdow.Click += (s, e) => CreateTabPage(menuItemListaPojazdow);
             menuItemPrzegladyOlejowe.Click += (s, e) => CreateTabPage(menuItemPrzegladyOlejowe);
+            menuItemPrzegladyRejestracyjne.Click += (s, e) => CreateTabPage(menuItemPrzegladyRejestracyjne);
         }
 
         private void CreateTabPage(ToolStripMenuItem item)
@@ -54,6 +55,10 @@ namespace RejAndOlej
                         break;
                     case "OilChecks":
                         userControl = new uc_OilChecks();
+                        openTabsTags.Add(item.Tag);
+                        break;
+                    case "RegistrationChecks":
+                        userControl = new uc_RegistrationChecks();
                         openTabsTags.Add(item.Tag);
                         break;
                 }

@@ -33,7 +33,19 @@ namespace RejAndOlej.Models
             }
             set { }
         }
-        public virtual ICollection<OilCheck> OilChecks { get; set; }
+
+        private ICollection<OilCheck> _oilChecks;
+        public virtual ICollection<OilCheck> OilChecks {
+            get
+            {
+                using (RejAndOlejContext context = new RejAndOlejContext())
+                {
+                    _oilChecks = context.OilChecks.Where(ch => ch.FleetVechicleId == FleetVehicleId).ToList();
+                }
+                return _oilChecks;
+            }
+            set { }
+        }
         public virtual ICollection<RegistrationCheck> RegistrationChecks { get; set; }
     }
 }

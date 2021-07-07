@@ -1,5 +1,6 @@
 ﻿using RejAndOlej.Helpers.Database;
 using RejAndOlej.Helpers.Controls;
+using RejAndOlej.Forms.Tables;
 using RejAndOlej.Models;
 using RejAndOlej.Views.TableViews.OilChecks;
 using System;
@@ -122,6 +123,20 @@ namespace RejAndOlej.UserControls.Flota
                 }
                 else
                     MessageBox.Show("Proszę wybrać pojazd do usunięcia", "Brak Danych do usunięcia");
+            }
+        }
+
+        private void toolStripMenuItemFlaota_Click(object sender, EventArgs e)
+        {
+            using (frm_FleetVehciclesList frm_FleetVehciclesList = new frm_FleetVehciclesList())
+            {
+                if (frm_FleetVehciclesList.ShowDialog() == DialogResult.OK)
+                {
+                    BusFleet vehicle = frm_FleetVehciclesList.GetFocusedRow();
+                    ICollection<OilCheck> oilChecks = vehicle.OilChecks;
+                    var mainview = GeneralOilChecksView.GetGeneralOilChecksList(oilChecks);
+                    dataGridViewOilChecksList.DataSource = mainview;
+                }
             }
         }
     }

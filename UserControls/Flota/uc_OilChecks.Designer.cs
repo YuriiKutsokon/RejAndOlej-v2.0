@@ -42,6 +42,9 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsddButtonTables = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripMenuItemFlaota = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOilChecksList)).BeginInit();
             this.groupBoxDataManipulation.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -115,7 +118,9 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonAdd,
             this.toolStripButtonEdit,
             this.toolStripButtonSave,
-            this.toolStripButtonDelete});
+            this.toolStripButtonDelete,
+            this.toolStripSeparator1,
+            this.tsddButtonTables});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(909, 27);
@@ -161,6 +166,29 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonDelete.Text = "toolStripButton7";
             this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
+            // tsddButtonTables
+            // 
+            this.tsddButtonTables.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsddButtonTables.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemFlaota});
+            this.tsddButtonTables.Image = global::RejAndOlej.Properties.Resources.table_256;
+            this.tsddButtonTables.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsddButtonTables.Name = "tsddButtonTables";
+            this.tsddButtonTables.Size = new System.Drawing.Size(33, 24);
+            this.tsddButtonTables.Text = "toolStripDropDownButton1";
+            // 
+            // toolStripMenuItemFlaota
+            // 
+            this.toolStripMenuItemFlaota.Name = "toolStripMenuItemFlaota";
+            this.toolStripMenuItemFlaota.Size = new System.Drawing.Size(154, 22);
+            this.toolStripMenuItemFlaota.Text = "Flota pojazdów";
+            this.toolStripMenuItemFlaota.Click += new System.EventHandler(this.toolStripMenuItemFlaota_Click);
+            // 
             // uc_OilChecks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -196,5 +224,8 @@ namespace RejAndOlej.UserControls.Flota
         private System.Windows.Forms.ToolStripButton toolStripButtonSave;
         private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
         private RejAndOlejContext context = new RejAndOlejContext();
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripDropDownButton tsddButtonTables;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFlaota;
     }
 }

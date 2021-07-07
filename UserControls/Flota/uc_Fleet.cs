@@ -1,5 +1,6 @@
 ﻿using RejAndOlej.Helpers.Controls;
 using RejAndOlej.Helpers.Database;
+using RejAndOlej.Forms.Tables;
 using RejAndOlej.Models;
 using RejAndOlej.Views.TableViews;
 using System;

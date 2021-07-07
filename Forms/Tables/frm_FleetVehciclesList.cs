@@ -13,9 +13,9 @@ using RejAndOlej.Views.TableViews;
 
 namespace RejAndOlej.Forms.Tables
 {
-    public partial class FleetVehciclesList : Form
+    public partial class frm_FleetVehciclesList : Form
     {
-        public FleetVehciclesList()
+        public frm_FleetVehciclesList()
         {
             InitializeComponent();
             InitDataGridView();
@@ -28,7 +28,12 @@ namespace RejAndOlej.Forms.Tables
 
         public BusFleet GetFocusedRow()
         {
-            BusFleet rowToExport = new BusFleet();
+            BusFleet rowToExport = null;
+
+            if (dataGridViewFleetList.SelectedRows.Count == 1)
+                rowToExport = GridViewHelper.GetObjectFromDataGridViewRow<BusFleet>(dataGridViewFleetList, "RegistrationNumber");
+            else
+                MessageBox.Show("Wybierz jeden pojazd");
 
             return rowToExport;
         }
@@ -38,6 +43,12 @@ namespace RejAndOlej.Forms.Tables
             ICollection<BusFleet> fleetVechicles = context.BusFleets.ToList();
             var mainView = FleetMainTableView.GetFleetView(fleetVechicles);
             dataGridViewFleetList.DataSource = mainView;
+        }
+
+        private void toolStripButtonConfirm_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

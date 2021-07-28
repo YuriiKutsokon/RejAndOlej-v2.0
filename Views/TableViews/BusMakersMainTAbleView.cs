@@ -11,14 +11,14 @@ namespace RejAndOlej.Views.TableViews
     {
         public int ID { get; set; }
 
-        public string BusMakerName { get; set; }
+        public string Name { get; set; }
 
         public string BusMakerNation { get; set; }
 
         public BusMakersMainTAbleView(BusMaker busMaker)
         {
             ID = busMaker.BusMakerId;
-            BusMakerName = busMaker.Name;
+            Name = busMaker.Name;
             BusMakerNation = busMaker.Nation;
         }
 

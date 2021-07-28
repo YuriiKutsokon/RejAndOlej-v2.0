@@ -100,6 +100,7 @@ namespace RejAndOlej
                 if (r.Contains(p))
                 {
                     TabPage TabP = (TabPage)tc.TabPages[tc.SelectedIndex];
+                    openTabsTags.Remove(TabP.Tag);
                     tc.TabPages.Remove(TabP);
                 }
             }

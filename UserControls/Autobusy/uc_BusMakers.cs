@@ -25,8 +25,8 @@ namespace RejAndOlej.UserControls.Autobusy
 
         private void RegisterEvents()
         {
-            dataGridViewBusMakersList.RowStateChanged += (s, e) => initManipulationControls((int)DBTableActions.Edit);
-            dataGridViewBusMakersList.CellStateChanged += (s, e) => initManipulationControls((int)DBTableActions.Edit);
+             dataGridViewBusMakersList.RowStateChanged += (s, e) => initManipulationControls((int)DBTableActions.Edit);
+             dataGridViewBusMakersList.CellStateChanged += (s, e) => initManipulationControls((int)DBTableActions.Edit);
 
             toolStripButtonEdit.Click += (s, e) => SetEditMode();
             dataGridViewBusMakersList.DoubleClick += (s, e) => SetEditMode();

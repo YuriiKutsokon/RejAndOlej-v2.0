@@ -52,12 +52,14 @@ namespace RejAndOlej.UserControls.Flota
             switch (mode)
             {
                 case (int)DBTableActions.Edit:
+                    groupBoxDataManipulation.Enabled = true;
                     OilCheck rowToEdit = GridViewHelper.GetObjectFromDataGridViewRow<OilCheck>(dataGridViewOilChecksList, SelectionColumn);
                     textBoxActualMileage.Text = Convert.ToString(rowToEdit.MileageOnOilCheck);
                     dateTimeOilCheck.Value = Convert.ToDateTime(rowToEdit.DateOfOilCheck);
                     break;
 
                 case (int)DBTableActions.Insert:
+                    groupBoxDataManipulation.Enabled = true;
                     textBoxActualMileage.Text = string.Empty;
                     dateTimeOilCheck.Value = DateTime.Now;
                     break;
@@ -87,6 +89,7 @@ namespace RejAndOlej.UserControls.Flota
                             tempContext.SaveChanges();
                         }
                         initDataGridView();
+                        groupBoxDataManipulation.Enabled = false;
                     }
                     else
                         MessageBox.Show("Nie wszyskie pola są wypełnione!", "brak danych");
@@ -105,6 +108,7 @@ namespace RejAndOlej.UserControls.Flota
                             tempContext.SaveChanges();
                         }
                         initDataGridView();
+                        groupBoxDataManipulation.Enabled = false;
                     }
                 }
             }

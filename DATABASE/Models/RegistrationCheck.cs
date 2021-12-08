@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 #nullable disable
@@ -12,6 +13,17 @@ namespace RejAndOlej.Models
         public DateTime? DateOfRegCheck { get; set; }
         public long? MileageOnRegCheck { get; set; }
 
-        public virtual BusFleet FleetVehicle { get; set; }
+        private BusFleet _FleetVehicle;
+        public virtual BusFleet FleetVehicle
+        {
+            get
+            {
+                using (RejAndOlejContext context = new RejAndOlejContext())
+                {
+                    _FleetVehicle = context.BusFleets.Where(bf => bf.FleetVehicleId == FleetVehicleId).FirstOrDefault();
+                }
+                return _FleetVehicle;
+            }
+        }
     }
 }

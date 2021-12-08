@@ -22,7 +22,7 @@ namespace RejAndOlej.Helpers.Controls
         public static void createTabCloseButton(TabControl tabControl, System.Windows.Forms.DrawItemEventArgs e)
         {
             Rectangle rect = tabControl.GetTabRect(e.Index);
-            rect.Offset(2, 0);
+            rect.Offset(0, 2);
             Brush TitleBrush = new SolidBrush(Color.Black);
             Font f = tabControl.Font;
             string title = tabControl.TabPages[e.Index].Text;

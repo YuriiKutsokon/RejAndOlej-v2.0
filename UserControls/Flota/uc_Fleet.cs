@@ -26,21 +26,21 @@ namespace RejAndOlej.UserControls.Flota
 
         protected void RegisterEvents()
         {
-            dataGridViewModelsList.RowStateChanged  += (s, e) => initManipulationControls(Convert.ToInt16(DBTableActions.Edit));
-            dataGridViewModelsList.CellStateChanged += (s, e) => initManipulationControls(Convert.ToInt16(DBTableActions.Edit));
+            dataGridViewModelsList.RowStateChanged  += (s, e) => initManipulationControls(DBTableActions.Edit);
+            dataGridViewModelsList.CellStateChanged += (s, e) => initManipulationControls(DBTableActions.Edit);
 
             toolStripButtonEdit.Click += (s, e) => SetEditMode();
             dataGridViewModelsList.DoubleClick += (s, e) => SetEditMode();
         }
 
-        protected void initManipulationControls(int? mode)
+        protected void initManipulationControls(DBTableActions? mode)
         {
-            BusFleet vehicle = GridViewHelper.GetObjectFromDataGridViewRow<BusFleet>
+            BusFleet vehicle = GridViewHelpers.GetObjectFromDataGridViewRow<BusFleet>
                                                                         (dataGridViewModelsList, SelectionColumn);
 
             switch (mode)
             {
-                case (int)DBTableActions.Edit:
+                case DBTableActions.Edit:
                     if (vehicle != null && vehicle.FleetVehicleId != 0)
                     {
                         textBoxRegNum.Text = vehicle.RegistrationNumber;
@@ -50,7 +50,7 @@ namespace RejAndOlej.UserControls.Flota
                         comboBoxBusMakerModels.Text = vehicle.Bus.ModelName;
                     }
                 break;
-                case (int)DBTableActions.Insert:
+                case DBTableActions.Insert:
                     if (vehicle != null && vehicle.FleetVehicleId != 0)
                     {
                         textBoxRegNum.Text = string.Empty;
@@ -88,7 +88,7 @@ namespace RejAndOlej.UserControls.Flota
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
             groupBoxDataManipulation.Enabled = true;
-            DBAction = (int)DBTableActions.Insert;
+            DBAction = DBTableActions.Insert;
             initManipulationControls(DBAction);
         }
 
@@ -110,7 +110,7 @@ namespace RejAndOlej.UserControls.Flota
         private void SetEditMode()
         {
             groupBoxDataManipulation.Enabled = true;
-            DBAction = (int)DBTableActions.Edit;
+            DBAction = DBTableActions.Edit;
             initManipulationControls(DBAction);
         }
 
@@ -118,9 +118,9 @@ namespace RejAndOlej.UserControls.Flota
         {
             if (DBAction != null)
             {
-                if (DBAction == (int)DBTableActions.Edit)
+                if (DBAction == DBTableActions.Edit)
                 {
-                    BusFleet vehicleToEdit = GridViewHelper.GetObjectFromDataGridViewRow<BusFleet>
+                    BusFleet vehicleToEdit = GridViewHelpers.GetObjectFromDataGridViewRow<BusFleet>
                                             (dataGridViewModelsList, SelectionColumn);
                     if(!HasEmptyControl(groupBoxDataManipulation.Controls))
                     {
@@ -138,7 +138,7 @@ namespace RejAndOlej.UserControls.Flota
                     else
                         MessageBox.Show("Nie wszyskie pola są wypełnione!", "brak danych");
                 }
-                else if(DBAction == (int)DBTableActions.Insert)
+                else if(DBAction == DBTableActions.Insert)
                 {
                     BusFleet vehicleToInsert = new BusFleet();
                     if (!HasEmptyControl(groupBoxDataManipulation.Controls))
@@ -166,7 +166,7 @@ namespace RejAndOlej.UserControls.Flota
             {
                 if (dataGridViewModelsList.SelectedCells.Count > 0 || dataGridViewModelsList.SelectedRows.Count > 0)
                 {
-                    BusFleet rowToDelete = GridViewHelper.GetObjectFromDataGridViewRow<BusFleet>(dataGridViewModelsList, SelectionColumn);
+                    BusFleet rowToDelete = GridViewHelpers.GetObjectFromDataGridViewRow<BusFleet>(dataGridViewModelsList, SelectionColumn);
                     tempContext.BusFleets.Remove(rowToDelete);
                     tempContext.SaveChanges();
                     initDataGridView();

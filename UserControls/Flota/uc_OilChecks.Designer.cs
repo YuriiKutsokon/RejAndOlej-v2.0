@@ -53,6 +53,7 @@ namespace RejAndOlej.UserControls.Flota
             this.tbMileage = new System.Windows.Forms.TextBox();
             this.tbModelName = new System.Windows.Forms.TextBox();
             this.tbRegistrationNumber = new System.Windows.Forms.TextBox();
+            this.cbSetActualMileageAsMileageOnCheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOilChecksList)).BeginInit();
             this.groupBoxDataManipulation.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -72,24 +73,25 @@ namespace RejAndOlej.UserControls.Flota
             // 
             // groupBoxDataManipulation
             // 
+            this.groupBoxDataManipulation.Controls.Add(this.cbSetActualMileageAsMileageOnCheck);
             this.groupBoxDataManipulation.Controls.Add(this.dateTimeOilCheck);
             this.groupBoxDataManipulation.Controls.Add(this.label3);
             this.groupBoxDataManipulation.Controls.Add(this.label2);
             this.groupBoxDataManipulation.Controls.Add(this.label1);
             this.groupBoxDataManipulation.Controls.Add(this.textBoxActualMileage);
             this.groupBoxDataManipulation.Controls.Add(this.textBoxPreviousMileage);
-            this.groupBoxDataManipulation.Enabled = false;
-            this.groupBoxDataManipulation.Location = new System.Drawing.Point(450, 70);
+            this.groupBoxDataManipulation.Location = new System.Drawing.Point(445, 46);
             this.groupBoxDataManipulation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxDataManipulation.Name = "groupBoxDataManipulation";
             this.groupBoxDataManipulation.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBoxDataManipulation.Size = new System.Drawing.Size(438, 144);
+            this.groupBoxDataManipulation.Size = new System.Drawing.Size(438, 168);
             this.groupBoxDataManipulation.TabIndex = 14;
             this.groupBoxDataManipulation.TabStop = false;
-            this.groupBoxDataManipulation.Text = "Wpisz dane przeglądu olejowego";
+            this.groupBoxDataManipulation.Text = "Dane przeglądu olejowego";
             // 
             // dateTimeOilCheck
             // 
+            this.dateTimeOilCheck.Enabled = false;
             this.dateTimeOilCheck.Location = new System.Drawing.Point(270, 99);
             this.dateTimeOilCheck.Name = "dateTimeOilCheck";
             this.dateTimeOilCheck.Size = new System.Drawing.Size(154, 23);
@@ -124,6 +126,7 @@ namespace RejAndOlej.UserControls.Flota
             // 
             // textBoxActualMileage
             // 
+            this.textBoxActualMileage.Enabled = false;
             this.textBoxActualMileage.Location = new System.Drawing.Point(270, 69);
             this.textBoxActualMileage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxActualMileage.Name = "textBoxActualMileage";
@@ -132,6 +135,7 @@ namespace RejAndOlej.UserControls.Flota
             // 
             // textBoxPreviousMileage
             // 
+            this.textBoxPreviousMileage.Enabled = false;
             this.textBoxPreviousMileage.Location = new System.Drawing.Point(270, 39);
             this.textBoxPreviousMileage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxPreviousMileage.Name = "textBoxPreviousMileage";
@@ -162,6 +166,7 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonAdd.Name = "toolStripButtonAdd";
             this.toolStripButtonAdd.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAdd.Text = "Dodaj";
+            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
             // 
             // toolStripButtonEdit
             // 
@@ -171,6 +176,7 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonEdit.Name = "toolStripButtonEdit";
             this.toolStripButtonEdit.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonEdit.Text = "toolStripButton5";
+            this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
             // 
             // toolStripButtonSave
             // 
@@ -180,6 +186,7 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonSave.Name = "toolStripButtonSave";
             this.toolStripButtonSave.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonSave.Text = "toolStripButton6";
+            this.toolStripButtonSave.Click += new System.EventHandler(this.toolStripButtonSave_Click);
             // 
             // toolStripButtonDelete
             // 
@@ -271,6 +278,17 @@ namespace RejAndOlej.UserControls.Flota
             this.tbRegistrationNumber.Size = new System.Drawing.Size(199, 23);
             this.tbRegistrationNumber.TabIndex = 0;
             // 
+            // cbSetActualMileageAsMileageOnCheck
+            // 
+            this.cbSetActualMileageAsMileageOnCheck.AutoSize = true;
+            this.cbSetActualMileageAsMileageOnCheck.Location = new System.Drawing.Point(13, 133);
+            this.cbSetActualMileageAsMileageOnCheck.Name = "cbSetActualMileageAsMileageOnCheck";
+            this.cbSetActualMileageAsMileageOnCheck.Size = new System.Drawing.Size(352, 19);
+            this.cbSetActualMileageAsMileageOnCheck.TabIndex = 10;
+            this.cbSetActualMileageAsMileageOnCheck.Text = "Aktualny stan licznika jako stan licznika na moment przeglądu";
+            this.cbSetActualMileageAsMileageOnCheck.UseVisualStyleBackColor = true;
+            this.cbSetActualMileageAsMileageOnCheck.CheckedChanged += new System.EventHandler(this.cbSetActualMileageAsMileageOnCheck_CheckedChanged);
+            // 
             // uc_OilChecks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -294,6 +312,7 @@ namespace RejAndOlej.UserControls.Flota
         }
 
         #endregion
+        private ControlCollection manipulationControls;
         private BusFleet selectedVehicle;
         private RejAndOlejContext context;
         private System.Windows.Forms.DataGridView dataGridViewOilChecksList;
@@ -318,5 +337,6 @@ namespace RejAndOlej.UserControls.Flota
         private System.Windows.Forms.TextBox tbRegistrationNumber;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButtonSearch;
+        private System.Windows.Forms.CheckBox cbSetActualMileageAsMileageOnCheck;
     }
 }

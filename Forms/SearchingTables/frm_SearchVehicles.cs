@@ -51,7 +51,7 @@ namespace RejAndOlej.Forms.SearchingTables
         {
             DataGridView gridView = dgvVehicles;
 
-            _searchedVehicle = GridViewHelper.GetObjectFromDataGridViewRow<BusFleet>(gridView, "RegistrationNumber");
+            _searchedVehicle = GridViewHelpers.GetObjectFromDataGridViewRow<BusFleet>(gridView, "RegistrationNumber");
             DialogResult = DialogResult.OK;
         }
     }

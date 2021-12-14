@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace RejAndOlej.Helpers.Controls
 {
-    class TabPageHelepr
+    class TabPageHeleprs
     {
         private static Point _imageLocation = new Point(18, 5);
 

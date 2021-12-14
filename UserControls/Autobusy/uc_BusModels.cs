@@ -71,7 +71,7 @@ namespace RejAndOlej.UserControls.Autobusy
             {
                 if (DBAction == (int)DBTableActions.Edit)
                 {
-                    Bus rowToEdit = GridViewHelper.GetObjectFromDataGridViewRow<Bus>(dataGridViewModelsList, "ModelName");
+                    Bus rowToEdit = GridViewHelpers.GetObjectFromDataGridViewRow<Bus>(dataGridViewModelsList, "ModelName");
                     if (!(String.IsNullOrEmpty(textBoxName.Text) && String.IsNullOrEmpty(textBoxDaysToCheck.Text) &&
                         String.IsNullOrEmpty(textBoxKmToOilCheck.Text) && String.IsNullOrEmpty(comboBoxBusMaker.Text)))
                     {
@@ -116,7 +116,7 @@ namespace RejAndOlej.UserControls.Autobusy
 
         private void initManipulationControls()
         {
-            Bus bus = GridViewHelper.GetObjectFromDataGridViewRow<Bus>(dataGridViewModelsList,"ModelName");
+            Bus bus = GridViewHelpers.GetObjectFromDataGridViewRow<Bus>(dataGridViewModelsList,"ModelName");
 
             if (bus != null && bus.BusId != 0)
             {

@@ -95,7 +95,6 @@ namespace RejAndOlej
             this.menuItemFlota.Name = "menuItemFlota";
             this.menuItemFlota.Size = new System.Drawing.Size(45, 19);
             this.menuItemFlota.Text = "Flota";
-            this.menuItemFlota.Click += new System.EventHandler(this.menuItemFlota_Click);
             // 
             // menuItemListaPojazdow
             // 

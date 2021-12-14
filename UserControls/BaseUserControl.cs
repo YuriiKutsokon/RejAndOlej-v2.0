@@ -1,4 +1,5 @@
 ﻿using System;
+using RejAndOlej.Helpers.Database;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,7 +23,7 @@ namespace RejAndOlej.UserControls
             InitializeComponent();
         }
 
-        protected int? DBAction = null;
+        protected DBTableActions? DBAction;
         protected string SelectionColumn
         {
             set;

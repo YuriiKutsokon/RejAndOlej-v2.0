@@ -141,7 +141,7 @@ namespace RejAndOlej.UserControls.Flota
             this.groupBoxDataManipulation.Size = new System.Drawing.Size(438, 144);
             this.groupBoxDataManipulation.TabIndex = 17;
             this.groupBoxDataManipulation.TabStop = false;
-            this.groupBoxDataManipulation.Text = "Wpisz dane przeglądu rejestracyjnego";
+            this.groupBoxDataManipulation.Text = "Dane przeglądu rejestracyjnego";
             // 
             // dateTimeOilCheck
             // 

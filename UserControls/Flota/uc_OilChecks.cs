@@ -1,4 +1,7 @@
 ﻿using RejAndOlej.Forms.SearchingTables;
+using RejAndOlej.Helpers;
+using RejAndOlej.Helpers.Controls;
+using RejAndOlej.Helpers.Database;
 using RejAndOlej.Models;
 using RejAndOlej.Views.TableViews;
 using System;
@@ -13,13 +16,15 @@ using System.Windows.Forms;
 
 namespace RejAndOlej.UserControls.Flota
 {
-    public partial class uc_OilChecks : UserControl
+    public partial class uc_OilChecks : BaseUserControl
     {
         public uc_OilChecks()
         {
             InitializeComponent();
 
             context = new RejAndOlejContext();
+
+            manipulationControls = groupBoxDataManipulation.Controls;
         }
 
         private void RegisterEvents()
@@ -29,9 +34,12 @@ namespace RejAndOlej.UserControls.Flota
 
         private void initDataGridView()
         {
-            ICollection<OilCheck> oilCheckList = context.OilChecks.ToList();
-            var mainView = OilChecksMainTableView.GetOilChecksView(oilCheckList);
-            dataGridViewOilChecksList.DataSource = mainView;
+            if (selectedVehicle != null)
+            {
+                ICollection<OilCheck> oilCheckList = selectedVehicle.OilChecks;
+                var mainView = OilChecksMainTableView.GetOilChecksView(oilCheckList);
+                dataGridViewOilChecksList.DataSource = mainView;
+            }
         }
 
         private void toolStripButtonSearch_Click(object sender, EventArgs e)
@@ -47,9 +55,54 @@ namespace RejAndOlej.UserControls.Flota
                     tbRegistrationNumber.Text = selectedVehicle.RegistrationNumber;
                     tbMileage.Text = selectedVehicle.Mileage.ToString();
                 }
+                initDataGridView();
             }
         }
 
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
+        {
+            FormHelpers.EnableManipulationControls(DBTableActions.Insert, manipulationControls);
+            DBAction = DBTableActions.Insert;
+        }
 
+        private void toolStripButtonEdit_Click(object sender, EventArgs e)
+        {
+            FormHelpers.EnableManipulationControls(DBTableActions.Edit, manipulationControls);
+            DBAction = DBTableActions.Edit;
+        }
+
+        private void toolStripButtonSave_Click(object sender, EventArgs e)
+        {
+            if (DBAction != null)
+            {
+                using (RejAndOlejContext tempContext = new RejAndOlejContext())
+                {
+                    OilCheck check = GridViewHelpers.GetObjectFromDataGridViewRow<OilCheck>(dataGridViewOilChecksList, "");
+                    switch (DBAction)
+                    {
+                        case DBTableActions.Insert:
+                            break;
+
+                        case DBTableActions.Edit:
+                            if(!HasEmptyControl(groupBoxDataManipulation.Controls))
+                            {
+                                check.MileageOnOilCheck = Convert.ToInt64(textBoxPreviousMileage.Text);
+                                check.DateOfOilCheck = dateTimeOilCheck.Value;
+                            }
+                            initDataGridView();
+                            break;
+                    }
+
+                }
+            }
+        }
+
+        private void cbSetActualMileageAsMileageOnCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+
+            if (checkBox.Checked)
+                textBoxPreviousMileage.Text = textBoxActualMileage.Text;
+        }
     }
 }

@@ -70,40 +70,12 @@ namespace RejAndOlej
                 tabControlInnerForms.SelectTab(tabPage);
             }
             else
-                TabPageHelepr.SelectOpenTab(tabControlInnerForms, item.Tag);
-        }
-
-        private void menuItemBusModels_Click(object sender, EventArgs e)
-        {
-            uc_BusModels bmControl = new uc_BusModels();
-            bmControl.Dock = DockStyle.Fill;
-            TabPage tabPageBusModels = new TabPage();
-            tabPageBusModels.Text = "Modele Autobusów";
-            tabPageBusModels.Controls.Add(bmControl);
-            tabControlInnerForms.TabPages.Add(tabPageBusModels);
-            tabControlInnerForms.SelectTab(tabPageBusModels);
-        }
-
-        private void menuItemFlota_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void menuItemListaPojazdow_Click(object sender, EventArgs e)
-        {
-            uc_Fleet fleetControl = new uc_Fleet();
-            fleetControl.Dock = DockStyle.Fill;
-            TabPage tabPageFleet = new TabPage();
-            tabPageFleet.Text = "Flota";
-            tabPageFleet.Controls.Add(fleetControl);
-            tabControlInnerForms.TabPages.Add(tabPageFleet);
-            tabControlInnerForms.SelectTab(tabPageFleet);
+                TabPageHeleprs.SelectOpenTab(tabControlInnerForms, item.Tag);
         }
 
         private void tabControlInnerForms_DrawItem(object sender, DrawItemEventArgs e)
         {
-            TabPageHelepr.createTabCloseButton(tabControlInnerForms, e);
+            TabPageHeleprs.createTabCloseButton(tabControlInnerForms, e);
         }
 
         private void tabControlInnerForms_Click(object sender, EventArgs e)
@@ -132,8 +104,13 @@ namespace RejAndOlej
             {
                 if (r.Contains(p))
                 {
-                    TabPage TabP = (TabPage)tc.TabPages[tc.SelectedIndex];
+                    TabPage TabP = tc.TabPages[tc.SelectedIndex];
                     tc.TabPages.Remove(TabP);
+
+                    if (openTabsTags.Contains(TabP.Tag))
+                    {
+                        openTabsTags.Remove(TabP.Tag);
+                    }
                 }
             }
 

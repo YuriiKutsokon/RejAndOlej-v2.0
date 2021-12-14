@@ -1,4 +1,5 @@
 ﻿using RejAndOlej.Models;
+using RejAndOlej.Views.TableViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace RejAndOlej.Helpers.Controls
     {
         RejAndOlejModelsBus,
         RejAndOlejModelsBusMaker,
-        RejAndOlejModelsBusFleet
+        RejAndOlejModelsBusFleet,
+        RejAndOlejModelsOilCheck,
+        RejAndOlejModelsRegistrationCheck
     }
 
-    class GridViewHelper
+    class GridViewHelpers
     {
         public static T GetObjectFromDataGridViewRow<T>(DataGridView sender, string searchingColumnName)
         {
@@ -54,6 +57,25 @@ namespace RejAndOlej.Helpers.Controls
                                 Convert.ToString(sender.SelectedCells[0].OwningRow.Cells[searchingColumnName].Value)).FirstOrDefault();
                         }
                     break;
+
+                    case nameof(ModelTypes.RejAndOlejModelsOilCheck):
+                        returnObj = new OilCheck();
+                        var str = nameof(OilChecksMainTableView.NumerRejestracyjny);
+                        if (sender.SelectedRows != null && sender.SelectedRows.Count != 0)
+                        {
+                            returnObj = context.OilChecks
+                                .Where(v => v.FleetVechicle.RegistrationNumber ==
+                                Convert.ToString(sender.SelectedRows[0].Cells[nameof(OilChecksMainTableView.NumerRejestracyjny)].Value) &&
+                                v.MileageOnOilCheck == Convert.ToInt64(sender.SelectedRows[0].Cells[nameof(OilChecksMainTableView.PrzebiegNaMomentPrzegladu)].Value)).FirstOrDefault();
+                        }
+                        else if (sender.SelectedCells != null && sender.SelectedCells.Count != 0)
+                        {
+                            returnObj = context.OilChecks
+                                .Where(v => v.FleetVechicle.RegistrationNumber ==
+                                Convert.ToString(sender.SelectedRows[0].Cells[nameof(OilChecksMainTableView.NumerRejestracyjny)].Value) &&
+                                v.MileageOnOilCheck == Convert.ToInt64(sender.SelectedRows[0].Cells[nameof(OilChecksMainTableView.PrzebiegNaMomentPrzegladu)].Value)).FirstOrDefault();
+                        }
+                        break;
                 }
 
             }

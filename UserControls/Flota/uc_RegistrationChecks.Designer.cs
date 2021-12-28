@@ -38,12 +38,12 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonSearch = new System.Windows.Forms.ToolStripButton();
             this.groupBoxDataManipulation = new System.Windows.Forms.GroupBox();
+            this.cbSetActualMileageAsMileageOnCheck = new System.Windows.Forms.CheckBox();
             this.dateTimeOilCheck = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tbActualMileage = new System.Windows.Forms.TextBox();
-            this.tbPreviousMileage = new System.Windows.Forms.TextBox();
+            this.tbMileageOnCheck = new System.Windows.Forms.TextBox();
+            this.labelLeftToNextCheck = new System.Windows.Forms.Label();
             this.dataGridViewRegistrationChecksList = new System.Windows.Forms.DataGridView();
             this.gbVehicleData = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -82,6 +82,7 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonAdd.Name = "toolStripButtonAdd";
             this.toolStripButtonAdd.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAdd.Text = "Dodaj";
+            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
             // 
             // toolStripButtonEdit
             // 
@@ -91,6 +92,7 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonEdit.Name = "toolStripButtonEdit";
             this.toolStripButtonEdit.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonEdit.Text = "toolStripButton5";
+            this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
             // 
             // toolStripButtonSave
             // 
@@ -100,6 +102,7 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonSave.Name = "toolStripButtonSave";
             this.toolStripButtonSave.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonSave.Text = "toolStripButton6";
+            this.toolStripButtonSave.Click += new System.EventHandler(this.toolStripButtonSave_Click);
             // 
             // toolStripButtonDelete
             // 
@@ -127,42 +130,43 @@ namespace RejAndOlej.UserControls.Flota
             // 
             // groupBoxDataManipulation
             // 
+            this.groupBoxDataManipulation.Controls.Add(this.cbSetActualMileageAsMileageOnCheck);
             this.groupBoxDataManipulation.Controls.Add(this.dateTimeOilCheck);
-            this.groupBoxDataManipulation.Controls.Add(this.label3);
             this.groupBoxDataManipulation.Controls.Add(this.label2);
             this.groupBoxDataManipulation.Controls.Add(this.label1);
-            this.groupBoxDataManipulation.Controls.Add(this.tbActualMileage);
-            this.groupBoxDataManipulation.Controls.Add(this.tbPreviousMileage);
+            this.groupBoxDataManipulation.Controls.Add(this.tbMileageOnCheck);
             this.groupBoxDataManipulation.Enabled = false;
-            this.groupBoxDataManipulation.Location = new System.Drawing.Point(452, 72);
+            this.groupBoxDataManipulation.Location = new System.Drawing.Point(452, 48);
             this.groupBoxDataManipulation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxDataManipulation.Name = "groupBoxDataManipulation";
             this.groupBoxDataManipulation.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBoxDataManipulation.Size = new System.Drawing.Size(438, 144);
+            this.groupBoxDataManipulation.Size = new System.Drawing.Size(438, 168);
             this.groupBoxDataManipulation.TabIndex = 17;
             this.groupBoxDataManipulation.TabStop = false;
             this.groupBoxDataManipulation.Text = "Dane przeglądu rejestracyjnego";
             // 
+            // cbSetActualMileageAsMileageOnCheck
+            // 
+            this.cbSetActualMileageAsMileageOnCheck.AutoSize = true;
+            this.cbSetActualMileageAsMileageOnCheck.Location = new System.Drawing.Point(13, 102);
+            this.cbSetActualMileageAsMileageOnCheck.Name = "cbSetActualMileageAsMileageOnCheck";
+            this.cbSetActualMileageAsMileageOnCheck.Size = new System.Drawing.Size(352, 19);
+            this.cbSetActualMileageAsMileageOnCheck.TabIndex = 10;
+            this.cbSetActualMileageAsMileageOnCheck.Text = "Aktualny stan licznika jako stan licznika na moment przeglądu";
+            this.cbSetActualMileageAsMileageOnCheck.UseVisualStyleBackColor = true;
+            this.cbSetActualMileageAsMileageOnCheck.CheckedChanged += new System.EventHandler(this.cbSetActualMileageAsMileageOnCheck_CheckedChanged);
+            // 
             // dateTimeOilCheck
             // 
-            this.dateTimeOilCheck.Location = new System.Drawing.Point(270, 99);
+            this.dateTimeOilCheck.Location = new System.Drawing.Point(270, 64);
             this.dateTimeOilCheck.Name = "dateTimeOilCheck";
             this.dateTimeOilCheck.Size = new System.Drawing.Size(154, 23);
             this.dateTimeOilCheck.TabIndex = 9;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 68);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(121, 15);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Aktualny stan licznika";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 98);
+            this.label2.Location = new System.Drawing.Point(13, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 15);
             this.label2.TabIndex = 3;
@@ -171,27 +175,27 @@ namespace RejAndOlej.UserControls.Flota
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 38);
+            this.label1.Location = new System.Drawing.Point(13, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(251, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "Stan licznika na moment ostatniego przeglądu";
             // 
-            // tbActualMileage
+            // tbMileageOnCheck
             // 
-            this.tbActualMileage.Location = new System.Drawing.Point(270, 69);
-            this.tbActualMileage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tbActualMileage.Name = "tbActualMileage";
-            this.tbActualMileage.Size = new System.Drawing.Size(154, 23);
-            this.tbActualMileage.TabIndex = 1;
+            this.tbMileageOnCheck.Location = new System.Drawing.Point(270, 34);
+            this.tbMileageOnCheck.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbMileageOnCheck.Name = "tbMileageOnCheck";
+            this.tbMileageOnCheck.Size = new System.Drawing.Size(154, 23);
+            this.tbMileageOnCheck.TabIndex = 0;
             // 
-            // tbPreviousMileage
+            // labelLeftToNextCheck
             // 
-            this.tbPreviousMileage.Location = new System.Drawing.Point(270, 39);
-            this.tbPreviousMileage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tbPreviousMileage.Name = "tbPreviousMileage";
-            this.tbPreviousMileage.Size = new System.Drawing.Size(154, 23);
-            this.tbPreviousMileage.TabIndex = 0;
+            this.labelLeftToNextCheck.AutoSize = true;
+            this.labelLeftToNextCheck.Location = new System.Drawing.Point(47, 127);
+            this.labelLeftToNextCheck.Name = "labelLeftToNextCheck";
+            this.labelLeftToNextCheck.Size = new System.Drawing.Size(0, 15);
+            this.labelLeftToNextCheck.TabIndex = 8;
             // 
             // dataGridViewRegistrationChecksList
             // 
@@ -207,6 +211,7 @@ namespace RejAndOlej.UserControls.Flota
             // gbVehicleData
             // 
             this.gbVehicleData.Controls.Add(this.label6);
+            this.gbVehicleData.Controls.Add(this.labelLeftToNextCheck);
             this.gbVehicleData.Controls.Add(this.label5);
             this.gbVehicleData.Controls.Add(this.label4);
             this.gbVehicleData.Controls.Add(this.tbMileage);
@@ -293,7 +298,7 @@ namespace RejAndOlej.UserControls.Flota
         }
 
         #endregion
-
+        private ControlCollection manipulationControls;
         private RejAndOlejContext context;
         private BusFleet selectedVehicle;
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -303,11 +308,10 @@ namespace RejAndOlej.UserControls.Flota
         private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
         private System.Windows.Forms.GroupBox groupBoxDataManipulation;
         private System.Windows.Forms.DateTimePicker dateTimeOilCheck;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelLeftToNextCheck;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbActualMileage;
-        private System.Windows.Forms.TextBox tbPreviousMileage;
+        private System.Windows.Forms.TextBox tbMileageOnCheck;
         private System.Windows.Forms.DataGridView dataGridViewRegistrationChecksList;
         private System.Windows.Forms.GroupBox gbVehicleData;
         private System.Windows.Forms.Label label6;
@@ -318,5 +322,7 @@ namespace RejAndOlej.UserControls.Flota
         private System.Windows.Forms.TextBox tbRegistrationNumber;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButtonSearch;
+        private System.Windows.Forms.CheckBox cbSetActualMileageAsMileageOnCheck;
+        private System.Windows.Forms.Label label;
     }
 }

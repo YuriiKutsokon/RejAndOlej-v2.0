@@ -22,8 +22,11 @@ namespace RejAndOlej.Models
         public DateTime? DateOfEnterToFleet { get; set; }
 
         private Bus _bus;
-        public virtual Bus Bus
-        {   get 
+        private ICollection<OilCheck> _oilChecks;
+        private ICollection<RegistrationCheck> _registrationChecks;
+
+        public virtual Bus Bus {
+            get
             {
                 using (RejAndOlejContext context = new RejAndOlejContext())
                 {
@@ -33,7 +36,29 @@ namespace RejAndOlej.Models
             }
             set { }
         }
-        public virtual ICollection<OilCheck> OilChecks { get; set; }
-        public virtual ICollection<RegistrationCheck> RegistrationChecks { get; set; }
+
+        public virtual ICollection<OilCheck> OilChecks {
+            get
+            {
+                using (RejAndOlejContext context = new RejAndOlejContext())
+                {
+                    _oilChecks = context.OilChecks.Where(c => c.FleetVechicle.RegistrationNumber == this.RegistrationNumber).ToList();
+                }
+                return _oilChecks;
+            }
+            set { }
+        }
+
+        public virtual ICollection<RegistrationCheck> RegistrationChecks {
+            get
+            {
+                using (RejAndOlejContext context = new RejAndOlejContext())
+                {
+                    _registrationChecks = context.RegistrationChecks.Where(c => c.FleetVehicle.RegistrationNumber == this.RegistrationNumber).ToList();
+                }
+                return _registrationChecks;
+            }
+            set { }
+        }
     }
 }

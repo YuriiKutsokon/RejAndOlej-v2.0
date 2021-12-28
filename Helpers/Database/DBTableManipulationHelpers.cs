@@ -13,7 +13,7 @@ namespace RejAndOlej.Helpers.Database
         Insert,
         Delete
     }
-    class DBTableManipulationHelper
+    class DBTableManipulationHelpers
     {
     }
 }

@@ -1,4 +1,5 @@
-﻿using RejAndOlej.Forms.SearchingTables;
+﻿using RejAndOlej.Forms.CreationForms;
+using RejAndOlej.Forms.SearchingTables;
 using RejAndOlej.Helpers;
 using RejAndOlej.Helpers.Controls;
 using RejAndOlej.Helpers.Database;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RejAndOlej.Enums;
 
 namespace RejAndOlej.UserControls.Flota
 {
@@ -25,11 +27,17 @@ namespace RejAndOlej.UserControls.Flota
             context = new RejAndOlejContext();
 
             manipulationControls = groupBoxDataManipulation.Controls;
+            labelLeftToNextCheck.Text = "Nie wybrano żadnego pojazdu";
+
+            RegisterEvents();
         }
 
         private void RegisterEvents()
         {
+            dataGridViewOilChecksList.RowStateChanged += (s, e) => initManipulationControls();
+            dataGridViewOilChecksList.CellStateChanged += (s, e) => initManipulationControls();
 
+            dataGridViewOilChecksList.DoubleClick += (s, e) => { FormHelpers.EnableManipulationControls(DBTableActions.Edit, manipulationControls); DBAction = DBTableActions.Edit; };
         }
 
         private void initDataGridView()
@@ -39,6 +47,43 @@ namespace RejAndOlej.UserControls.Flota
                 ICollection<OilCheck> oilCheckList = selectedVehicle.OilChecks;
                 var mainView = OilChecksMainTableView.GetOilChecksView(oilCheckList);
                 dataGridViewOilChecksList.DataSource = mainView;
+
+                if (oilCheckList.Count != 0)
+                {
+                    var lastCheck = oilCheckList.Last();
+
+                    long? fromLastCheck = Convert.ToInt64(tbMileage.Text) - lastCheck.MileageOnOilCheck;
+                    if (fromLastCheck < lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection)
+                    {
+                        labelLeftToNextCheck.ForeColor = Color.Green;
+                        labelLeftToNextCheck.Text = "Do następnego przeglądu: " + Convert.ToString(lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection - fromLastCheck) + " km";
+                    }
+                    else
+                    {
+                        labelLeftToNextCheck.ForeColor = Color.Red;
+                        labelLeftToNextCheck.Text = "Przegląd spóżniony! Przegląd przeterminowany na " + Convert.ToString(fromLastCheck - lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection);
+                    }
+                }
+                else
+                {
+                    labelLeftToNextCheck.ForeColor = Color.Red;
+                    labelLeftToNextCheck.Text = "Pojazd jezcze nie ma wprowadzonych przeglądów olejowych!";
+                }
+            }
+            else
+            {
+                labelLeftToNextCheck.Text = "Nie wybrano żadnego pojazdu";
+            }
+        }
+
+        private void initManipulationControls()
+        {
+            var check = GridViewHelpers.GetObjectFromDataGridViewRow<OilCheck>(dataGridViewOilChecksList, "");
+            
+            if (check != null)
+            {
+                textBoxMileageOnCheck.Text = check.MileageOnOilCheck.ToString();
+                dateTimeOilCheck.Value = (DateTime)check.DateOfOilCheck;
             }
         }
 
@@ -61,8 +106,37 @@ namespace RejAndOlej.UserControls.Flota
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            FormHelpers.EnableManipulationControls(DBTableActions.Insert, manipulationControls);
+            frm_AddCheck frmAddCheck = null;
+
+            if (selectedVehicle != null )
+                 frmAddCheck = new frm_AddCheck(selectedVehicle);
+            else
+            {
+                MessageBox.Show("Wybierz pojazd, dla którego chcesz wpisać nowy przegląd", "Pojazd nie jest wybrany");
+                return;
+            }
+
+            if (frmAddCheck.ShowDialog() == DialogResult.OK)
+            {
+                if (frmAddCheck.CheckType == EnChecks.CheckTypes.Oil)
+                {
+                    OilCheck newOilCheck = frmAddCheck.NewOilCheck;
+
+                    using (RejAndOlejContext tempContext = new RejAndOlejContext())
+                    {
+                        tempContext.OilChecks.Add(newOilCheck);
+                        
+                        if (frmAddCheck.SetMileageAsActual)
+                            selectedVehicle.Mileage = newOilCheck.MileageOnOilCheck;
+
+                        tempContext.SaveChanges();
+                    }
+
+                }
+            }
+            
             DBAction = DBTableActions.Insert;
+            initDataGridView();
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
@@ -86,8 +160,9 @@ namespace RejAndOlej.UserControls.Flota
                         case DBTableActions.Edit:
                             if(!HasEmptyControl(groupBoxDataManipulation.Controls))
                             {
-                                check.MileageOnOilCheck = Convert.ToInt64(textBoxPreviousMileage.Text);
+                                check.MileageOnOilCheck = Convert.ToInt64(textBoxMileageOnCheck.Text);
                                 check.DateOfOilCheck = dateTimeOilCheck.Value;
+                                tempContext.SaveChanges();
                             }
                             initDataGridView();
                             break;
@@ -102,7 +177,7 @@ namespace RejAndOlej.UserControls.Flota
             CheckBox checkBox = sender as CheckBox;
 
             if (checkBox.Checked)
-                textBoxPreviousMileage.Text = textBoxActualMileage.Text;
+                textBoxMileageOnCheck.Text = tbMileage.Text;
         }
     }
 }

@@ -59,8 +59,6 @@ namespace RejAndOlej.Helpers.Controls
                     break;
 
                     case nameof(ModelTypes.RejAndOlejModelsOilCheck):
-                        returnObj = new OilCheck();
-                        var str = nameof(OilChecksMainTableView.NumerRejestracyjny);
                         if (sender.SelectedRows != null && sender.SelectedRows.Count != 0)
                         {
                             returnObj = context.OilChecks
@@ -72,8 +70,25 @@ namespace RejAndOlej.Helpers.Controls
                         {
                             returnObj = context.OilChecks
                                 .Where(v => v.FleetVechicle.RegistrationNumber ==
-                                Convert.ToString(sender.SelectedRows[0].Cells[nameof(OilChecksMainTableView.NumerRejestracyjny)].Value) &&
-                                v.MileageOnOilCheck == Convert.ToInt64(sender.SelectedRows[0].Cells[nameof(OilChecksMainTableView.PrzebiegNaMomentPrzegladu)].Value)).FirstOrDefault();
+                                Convert.ToString(sender.SelectedCells[0].OwningRow.Cells[nameof(OilChecksMainTableView.NumerRejestracyjny)].Value) &&
+                                v.MileageOnOilCheck == Convert.ToInt64(sender.SelectedCells[0].OwningRow.Cells[nameof(OilChecksMainTableView.PrzebiegNaMomentPrzegladu)].Value)).FirstOrDefault();
+                        }
+                        break;
+
+                    case nameof(ModelTypes.RejAndOlejModelsRegistrationCheck):
+                        if (sender.SelectedRows != null && sender.SelectedRows.Count != 0)
+                        {
+                            returnObj = context.RegistrationChecks
+                                .Where(v => v.FleetVehicle.RegistrationNumber ==
+                                Convert.ToString(sender.SelectedRows[0].Cells[nameof(RegistrationChecksMainTableView.NumerRejestracyjny)].Value) &&
+                                v.MileageOnRegCheck == Convert.ToInt64(sender.SelectedRows[0].Cells[nameof(RegistrationChecksMainTableView.PrzebiegNaMomentPrzegladu)].Value)).FirstOrDefault();
+                        }
+                        else if (sender.SelectedCells != null && sender.SelectedCells.Count != 0)
+                        {
+                            returnObj = context.RegistrationChecks
+                                .Where(v => v.FleetVehicle.RegistrationNumber ==
+                                Convert.ToString(sender.SelectedCells[0].OwningRow.Cells[nameof(RegistrationChecksMainTableView.NumerRejestracyjny)].Value) &&
+                                v.MileageOnRegCheck == Convert.ToInt64(sender.SelectedCells[0].OwningRow.Cells[nameof(RegistrationChecksMainTableView.PrzebiegNaMomentPrzegladu)].Value)).FirstOrDefault();
                         }
                         break;
                 }

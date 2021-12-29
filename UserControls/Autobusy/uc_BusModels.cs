@@ -77,6 +77,7 @@ namespace RejAndOlej.UserControls.Autobusy
                     {
                         using (RejAndOlejContext tempContext = new RejAndOlejContext())
                         {
+                            tempContext.Update(rowToEdit);
                             rowToEdit.ModelName = textBoxName.Text;
                             rowToEdit.DefaultDaysToRegistrationReview = Convert.ToInt32(textBoxDaysToCheck.Text);
                             rowToEdit.DefaultKmToOilInspection = Convert.ToInt64(textBoxKmToOilCheck.Text);

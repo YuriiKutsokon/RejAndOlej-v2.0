@@ -52,27 +52,31 @@ namespace RejAndOlej.UserControls.Autobusy
             this.groupBoxDataManipulation.Controls.Add(this.textBoxNation);
             this.groupBoxDataManipulation.Controls.Add(this.textBoxName);
             this.groupBoxDataManipulation.Enabled = false;
-            this.groupBoxDataManipulation.Location = new System.Drawing.Point(188, 18);
+            this.groupBoxDataManipulation.Location = new System.Drawing.Point(164, 14);
+            this.groupBoxDataManipulation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxDataManipulation.Name = "groupBoxDataManipulation";
-            this.groupBoxDataManipulation.Size = new System.Drawing.Size(674, 191);
+            this.groupBoxDataManipulation.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxDataManipulation.Size = new System.Drawing.Size(590, 143);
             this.groupBoxDataManipulation.TabIndex = 0;
             this.groupBoxDataManipulation.TabStop = false;
             this.groupBoxDataManipulation.Text = "Edytuj Producenta";
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(220, 156);
+            this.buttonCancel.Location = new System.Drawing.Point(192, 117);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(94, 29);
+            this.buttonCancel.Size = new System.Drawing.Size(82, 22);
             this.buttonCancel.TabIndex = 5;
             this.buttonCancel.Text = "Cofnij";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(414, 156);
+            this.buttonSave.Location = new System.Drawing.Point(362, 117);
+            this.buttonSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(94, 29);
+            this.buttonSave.Size = new System.Drawing.Size(82, 22);
             this.buttonSave.TabIndex = 4;
             this.buttonSave.Text = "Zapisz";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -81,41 +85,44 @@ namespace RejAndOlej.UserControls.Autobusy
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(89, 100);
+            this.label2.Location = new System.Drawing.Point(78, 75);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 20);
+            this.label2.Size = new System.Drawing.Size(98, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "Kraj pochodzenia";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(160, 46);
+            this.label1.Location = new System.Drawing.Point(140, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 20);
+            this.label1.Size = new System.Drawing.Size(42, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "Nazwa";
             // 
             // textBoxNation
             // 
-            this.textBoxNation.Location = new System.Drawing.Point(220, 97);
+            this.textBoxNation.Location = new System.Drawing.Point(192, 73);
+            this.textBoxNation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxNation.Name = "textBoxNation";
-            this.textBoxNation.Size = new System.Drawing.Size(288, 27);
+            this.textBoxNation.Size = new System.Drawing.Size(252, 23);
             this.textBoxNation.TabIndex = 1;
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(220, 46);
+            this.textBoxName.Location = new System.Drawing.Point(192, 34);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(288, 27);
+            this.textBoxName.Size = new System.Drawing.Size(252, 23);
             this.textBoxName.TabIndex = 0;
             // 
             // buttonDelete
             // 
             this.buttonDelete.Image = global::RejAndOlej.Properties.Resources.Delete_256;
-            this.buttonDelete.Location = new System.Drawing.Point(69, 113);
+            this.buttonDelete.Location = new System.Drawing.Point(60, 85);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(94, 29);
+            this.buttonDelete.Size = new System.Drawing.Size(82, 22);
             this.buttonDelete.TabIndex = 7;
             this.buttonDelete.Text = "Usuń";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -123,9 +130,10 @@ namespace RejAndOlej.UserControls.Autobusy
             // 
             // buttonNewBusmaker
             // 
-            this.buttonNewBusmaker.Location = new System.Drawing.Point(69, 63);
+            this.buttonNewBusmaker.Location = new System.Drawing.Point(60, 47);
+            this.buttonNewBusmaker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonNewBusmaker.Name = "buttonNewBusmaker";
-            this.buttonNewBusmaker.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewBusmaker.Size = new System.Drawing.Size(82, 22);
             this.buttonNewBusmaker.TabIndex = 6;
             this.buttonNewBusmaker.Text = "Nowy";
             this.buttonNewBusmaker.UseVisualStyleBackColor = true;
@@ -134,24 +142,26 @@ namespace RejAndOlej.UserControls.Autobusy
             // dataGridViewBusMakersList
             // 
             this.dataGridViewBusMakersList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewBusMakersList.Location = new System.Drawing.Point(0, 232);
+            this.dataGridViewBusMakersList.Location = new System.Drawing.Point(-10, 173);
+            this.dataGridViewBusMakersList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewBusMakersList.Name = "dataGridViewBusMakersList";
             this.dataGridViewBusMakersList.RowHeadersWidth = 51;
             this.dataGridViewBusMakersList.RowTemplate.Height = 29;
-            this.dataGridViewBusMakersList.Size = new System.Drawing.Size(1039, 743);
+            this.dataGridViewBusMakersList.Size = new System.Drawing.Size(909, 314);
             this.dataGridViewBusMakersList.TabIndex = 1;
             this.dataGridViewBusMakersList.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewBusMakersList_CellMouseDoubleClick);
             // 
-            // BusMakers
+            // uc_BusMakers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.dataGridViewBusMakersList);
             this.Controls.Add(this.buttonNewBusmaker);
             this.Controls.Add(this.groupBoxDataManipulation);
-            this.Name = "BusMakers";
-            this.Size = new System.Drawing.Size(1039, 649);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Name = "uc_BusMakers";
+            this.Size = new System.Drawing.Size(909, 487);
             this.groupBoxDataManipulation.ResumeLayout(false);
             this.groupBoxDataManipulation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBusMakersList)).EndInit();

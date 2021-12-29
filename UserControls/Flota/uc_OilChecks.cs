@@ -149,25 +149,25 @@ namespace RejAndOlej.UserControls.Flota
         {
             if (DBAction != null)
             {
-                using (RejAndOlejContext tempContext = new RejAndOlejContext())
+                OilCheck check = GridViewHelpers.GetObjectFromDataGridViewRow<OilCheck>(dataGridViewOilChecksList, "");
+                switch (DBAction)
                 {
-                    OilCheck check = GridViewHelpers.GetObjectFromDataGridViewRow<OilCheck>(dataGridViewOilChecksList, "");
-                    switch (DBAction)
-                    {
-                        case DBTableActions.Insert:
-                            break;
+                    case DBTableActions.Insert:
+                        break;
 
-                        case DBTableActions.Edit:
-                            if(!HasEmptyControl(groupBoxDataManipulation.Controls))
+                    case DBTableActions.Edit:
+                        if (!HasEmptyControl(groupBoxDataManipulation.Controls))
+                        {
+                            using (RejAndOlejContext tempContext = new RejAndOlejContext())
                             {
+                                tempContext.Update(check);
                                 check.MileageOnOilCheck = Convert.ToInt64(textBoxMileageOnCheck.Text);
                                 check.DateOfOilCheck = dateTimeOilCheck.Value;
                                 tempContext.SaveChanges();
                             }
-                            initDataGridView();
-                            break;
-                    }
-
+                        }
+                        initDataGridView();
+                        break;
                 }
             }
         }

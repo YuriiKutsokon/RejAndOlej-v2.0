@@ -162,6 +162,7 @@ namespace RejAndOlej.UserControls.Flota
                         case DBTableActions.Edit:
                             if (!HasEmptyControl(groupBoxDataManipulation.Controls))
                             {
+                                tempContext.Update(check);
                                 check.MileageOnRegCheck = Convert.ToInt64(tbMileageOnCheck.Text);
                                 check.DateOfRegCheck = dateTimeOilCheck.Value;
                                 tempContext.SaveChanges();

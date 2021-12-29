@@ -200,12 +200,12 @@ namespace RejAndOlej.UserControls.Flota
             // dataGridViewRegistrationChecksList
             // 
             this.dataGridViewRegistrationChecksList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewRegistrationChecksList.Location = new System.Drawing.Point(0, 233);
+            this.dataGridViewRegistrationChecksList.Location = new System.Drawing.Point(-1, 221);
             this.dataGridViewRegistrationChecksList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewRegistrationChecksList.Name = "dataGridViewRegistrationChecksList";
             this.dataGridViewRegistrationChecksList.RowHeadersWidth = 51;
             this.dataGridViewRegistrationChecksList.RowTemplate.Height = 29;
-            this.dataGridViewRegistrationChecksList.Size = new System.Drawing.Size(909, 457);
+            this.dataGridViewRegistrationChecksList.Size = new System.Drawing.Size(909, 266);
             this.dataGridViewRegistrationChecksList.TabIndex = 16;
             // 
             // gbVehicleData

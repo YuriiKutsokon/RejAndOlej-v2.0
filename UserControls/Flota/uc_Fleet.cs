@@ -126,6 +126,7 @@ namespace RejAndOlej.UserControls.Flota
                     {
                         using (RejAndOlejContext tempContext = new RejAndOlejContext())
                         {
+                            tempContext.Update(vehicleToEdit);
                             vehicleToEdit.RegistrationNumber = textBoxRegNum.Text;
                             vehicleToEdit.RaceNumber = textBoxracNumber.Text;
                             vehicleToEdit.Mileage = Convert.ToInt64(textBoxMileage.Text);

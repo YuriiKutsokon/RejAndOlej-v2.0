@@ -62,12 +62,12 @@ namespace RejAndOlej.UserControls.Flota
             // dataGridViewOilChecksList
             // 
             this.dataGridViewOilChecksList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewOilChecksList.Location = new System.Drawing.Point(-1, 234);
+            this.dataGridViewOilChecksList.Location = new System.Drawing.Point(-1, 219);
             this.dataGridViewOilChecksList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewOilChecksList.Name = "dataGridViewOilChecksList";
             this.dataGridViewOilChecksList.RowHeadersWidth = 51;
             this.dataGridViewOilChecksList.RowTemplate.Height = 29;
-            this.dataGridViewOilChecksList.Size = new System.Drawing.Size(909, 472);
+            this.dataGridViewOilChecksList.Size = new System.Drawing.Size(909, 268);
             this.dataGridViewOilChecksList.TabIndex = 13;
             // 
             // groupBoxDataManipulation

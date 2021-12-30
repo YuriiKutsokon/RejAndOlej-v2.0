@@ -96,14 +96,16 @@ namespace RejAndOlej.UserControls.Autobusy
                         String.IsNullOrEmpty(textBoxKmToOilCheck.Text) && String.IsNullOrEmpty(comboBoxBusMaker.Text)))
                     {
                         Bus rowToInsert = new Bus();
+                        int newBusId = context.Buses.OrderBy(bus => bus.BusId).Last().BusId + 1;
+                        int busMakerId = context.BusMakers.Where(bm => bm.Name == comboBoxBusMaker.Text).FirstOrDefault().BusMakerId;
 
                         using (RejAndOlejContext tempContext = new RejAndOlejContext())
                         {
-                            rowToInsert.BusId = tempContext.Buses.OrderBy(bus => bus.BusId).Last().BusId + 1;
+                            rowToInsert.BusId = newBusId;
                             rowToInsert.ModelName = textBoxName.Text;
                             rowToInsert.DefaultDaysToRegistrationReview = Convert.ToInt32(textBoxDaysToCheck.Text);
                             rowToInsert.DefaultKmToOilInspection = Convert.ToInt64(textBoxKmToOilCheck.Text);
-                            rowToInsert.BusMakerId = tempContext.BusMakers.Where(bm => bm.Name == comboBoxBusMaker.Text).FirstOrDefault().BusMakerId;
+                            rowToInsert.BusMakerId = busMakerId;
                             tempContext.Buses.Add(rowToInsert);
                             tempContext.SaveChanges();
                         }

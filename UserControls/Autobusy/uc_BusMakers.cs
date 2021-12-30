@@ -117,14 +117,14 @@ namespace RejAndOlej.UserControls.Autobusy
                 {
                     if (textBoxName.Text != "" && textBoxNation.Text != "")
                     {
-                        using(RejAndOlejContext tempContext = new RejAndOlejContext())
+                        int busMakerId = context.BusMakers.OrderBy(bm => bm.BusMakerId).Last().BusMakerId + 1;
+                        using (RejAndOlejContext tempContext = new RejAndOlejContext())
                         {
                             BusMaker rowToInsert = new BusMaker()
                             {
-                                //BusMakerId = tempContext.BusMakers.OrderBy(bm => bm.BusMakerId).Last().BusMakerId + 1,
-                                BusMakerId = 7,
+                                BusMakerId = busMakerId,
                                 Name = textBoxName.Text,
-                                Nation = textBoxNation.Text
+                                Nation = textBoxNation.Text,
                             };
                             tempContext.BusMakers.Add(rowToInsert);
                             tempContext.SaveChanges();

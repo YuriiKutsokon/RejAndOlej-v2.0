@@ -143,16 +143,18 @@ namespace RejAndOlej.UserControls.Flota
                 else if(DBAction == DBTableActions.Insert)
                 {
                     BusFleet vehicleToInsert = new BusFleet();
+                    int newFleetVehicleId = context.BusFleets.OrderBy(bf => bf.FleetVehicleId).Last().FleetVehicleId + 1;
+                    int busId = context.Buses.Where(bus => bus.ModelName == comboBoxBusMakerModels.Text).FirstOrDefault().BusId;
                     if (!HasEmptyControl(groupBoxDataManipulation.Controls))
                     {
                         using (RejAndOlejContext tempContext = new RejAndOlejContext())
                         {
-                            vehicleToInsert.FleetVehicleId = tempContext.BusFleets.OrderBy(bf => bf.FleetVehicleId).Last().FleetVehicleId + 1;
+                            vehicleToInsert.FleetVehicleId = newFleetVehicleId;
                             vehicleToInsert.RegistrationNumber = textBoxRegNum.Text;
                             vehicleToInsert.RaceNumber = textBoxracNumber.Text;
                             vehicleToInsert.Mileage = Convert.ToInt64(textBoxMileage.Text);
                             vehicleToInsert.DateOfEnterToFleet = Convert.ToDateTime(dateTimeEnterToFleet.Value);
-                            vehicleToInsert.BusId = context.Buses.Where(bus => bus.ModelName == comboBoxBusMakerModels.Text).FirstOrDefault().BusId;
+                            vehicleToInsert.BusId = busId;
                             tempContext.BusFleets.Add(vehicleToInsert);
                             tempContext.SaveChanges();
                         }

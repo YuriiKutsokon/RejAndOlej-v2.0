@@ -1,6 +1,7 @@
 ﻿using RejAndOlej.Helpers.Controls;
 using RejAndOlej.Helpers.Database;
 using RejAndOlej.Models;
+using RejAndOlej.Service;
 using RejAndOlej.Views.TableViews;
 using System;
 using System.Collections.Generic;
@@ -70,8 +71,8 @@ namespace RejAndOlej.UserControls.Flota
         protected void initDataGridView()
         {
             ICollection<BusFleet> fleetVechicles = context.BusFleets.ToList();
-            var mainView = FleetMainTableView.GetFleetView(fleetVechicles);
-            dataGridViewModelsList.DataSource = mainView;
+            displayList = FleetMainTableView.GetFleetView(fleetVechicles);
+            dataGridViewModelsList.DataSource = displayList;
         }
 
         private void initComboBox()
@@ -176,6 +177,18 @@ namespace RejAndOlej.UserControls.Flota
                     MessageBox.Show("Proszę wybrać pojazd do usunięcia", "Brak Danych do usunięcia");
             }
 
+        }
+
+        private void toolStripButtonPrint_Click(object sender, EventArgs e)
+        {
+            if (displayList != null && displayList.Count != 0)
+            {
+                ListPrinter printer = new ListPrinter(displayList);
+
+                printer.Print();
+            }
+            else
+                MessageBox.Show("Brak danych do wydruku!");
         }
     }
 }

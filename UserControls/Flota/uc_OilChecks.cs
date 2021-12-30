@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RejAndOlej.Enums;
+using RejAndOlej.Service;
 
 namespace RejAndOlej.UserControls.Flota
 {
@@ -45,8 +46,8 @@ namespace RejAndOlej.UserControls.Flota
             if (selectedVehicle != null)
             {
                 ICollection<OilCheck> oilCheckList = selectedVehicle.OilChecks;
-                var mainView = OilChecksMainTableView.GetOilChecksView(oilCheckList);
-                dataGridViewOilChecksList.DataSource = mainView;
+                displayList = OilChecksMainTableView.GetOilChecksView(oilCheckList);
+                dataGridViewOilChecksList.DataSource = displayList;
 
                 if (oilCheckList.Count != 0)
                 {
@@ -178,6 +179,36 @@ namespace RejAndOlej.UserControls.Flota
 
             if (checkBox.Checked)
                 textBoxMileageOnCheck.Text = tbMileage.Text;
+        }
+
+        private void toolStripButtonPrint_Click(object sender, EventArgs e)
+        {
+            if (displayList != null && displayList.Count != 0)
+            {
+                ListPrinter printer = new ListPrinter(displayList);
+
+                printer.Print();
+            }
+            else
+                MessageBox.Show("Brak danych do wydruku!");
+        }
+
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            using (RejAndOlejContext tempContext = new RejAndOlejContext())
+            {
+                if (dataGridViewOilChecksList.SelectedRows.Count > 0 || dataGridViewOilChecksList.SelectedCells.Count > 0)
+                {
+                    var rowToDelete = GridViewHelpers.GetObjectFromDataGridViewRow<OilCheck>(dataGridViewOilChecksList, "");
+
+                    tempContext.Remove(rowToDelete);
+                    tempContext.SaveChanges();
+                }
+                else
+                    MessageBox.Show("Proszę wybrać przegląd do usunięcia", "Brak Danych do usunięcia");
+            }
+
+            initDataGridView();
         }
     }
 }

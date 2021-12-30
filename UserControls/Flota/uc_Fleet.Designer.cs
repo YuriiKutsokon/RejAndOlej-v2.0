@@ -1,5 +1,7 @@
 ﻿
 using RejAndOlej.Models;
+using RejAndOlej.Views.TableViews;
+using System.Collections.Generic;
 
 namespace RejAndOlej.UserControls.Flota
 {
@@ -31,11 +33,14 @@ namespace RejAndOlej.UserControls.Flota
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc_Fleet));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
             this.groupBoxDataManipulation = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxBusMakerModels = new System.Windows.Forms.ComboBox();
@@ -62,7 +67,9 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonAdd,
             this.toolStripButtonEdit,
             this.toolStripButtonSave,
-            this.toolStripButtonDelete});
+            this.toolStripButtonDelete,
+            this.toolStripSeparator1,
+            this.toolStripButtonPrint});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(909, 27);
@@ -107,6 +114,21 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonDelete.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonDelete.Text = "toolStripButton7";
             this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButtonPrint
+            // 
+            this.toolStripButtonPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPrint.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonPrint.Image")));
+            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
+            this.toolStripButtonPrint.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonPrint.Text = "toolStripButton1";
+            this.toolStripButtonPrint.Click += new System.EventHandler(this.toolStripButtonPrint_Click);
             // 
             // groupBoxDataManipulation
             // 
@@ -269,7 +291,7 @@ namespace RejAndOlej.UserControls.Flota
         }
 
         #endregion
-
+        private ICollection<FleetMainTableView> displayList;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonAdd;
         private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
@@ -290,5 +312,7 @@ namespace RejAndOlej.UserControls.Flota
         private RejAndOlejContext context = new RejAndOlejContext();
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBoxBusMakerModels;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolStripButtonPrint;
     }
 }

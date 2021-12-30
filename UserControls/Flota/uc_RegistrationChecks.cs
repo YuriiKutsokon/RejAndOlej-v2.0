@@ -14,6 +14,7 @@ using RejAndOlej.Helpers;
 using RejAndOlej.Helpers.Controls;
 using RejAndOlej.Helpers.Database;
 using RejAndOlej.Models;
+using RejAndOlej.Service;
 using RejAndOlej.Views.TableViews;
 
 namespace RejAndOlej.UserControls.Flota
@@ -45,8 +46,8 @@ namespace RejAndOlej.UserControls.Flota
             if (selectedVehicle != null)
             {
                 ICollection<RegistrationCheck> checkslist = selectedVehicle.RegistrationChecks;
-                var mainView = RegistrationChecksMainTableView.GetRegistrationChecksListView(checkslist);
-                dataGridViewRegistrationChecksList.DataSource = mainView;
+                displayList = RegistrationChecksMainTableView.GetRegistrationChecksListView(checkslist);
+                dataGridViewRegistrationChecksList.DataSource = displayList;
 
                 if (checkslist.Count != 0)
                 {
@@ -181,6 +182,36 @@ namespace RejAndOlej.UserControls.Flota
 
             if (checkBox.Checked)
                 tbMileageOnCheck.Text = tbMileage.Text;
+        }
+
+        private void toolStripButtonPrint_Click(object sender, EventArgs e)
+        {
+            if (displayList != null && displayList.Count != 0)
+            {
+                ListPrinter printer = new ListPrinter(displayList);
+
+                printer.Print();
+            }
+            else
+                MessageBox.Show("Brak danych do wydruku!");
+        }
+
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            using (RejAndOlejContext tempContext = new RejAndOlejContext())
+            {
+                if (dataGridViewRegistrationChecksList.SelectedRows.Count > 0 || dataGridViewRegistrationChecksList.SelectedCells.Count > 0)
+                {
+                    var rowToDelete = GridViewHelpers.GetObjectFromDataGridViewRow<OilCheck>(dataGridViewRegistrationChecksList, "");
+
+                    tempContext.Remove(rowToDelete);
+                    tempContext.SaveChanges();
+                }
+                else
+                    MessageBox.Show("Proszę wybrać przegląd do usunięcia", "Brak Danych do usunięcia");
+            }
+
+            initDataGridView();
         }
     }
 }

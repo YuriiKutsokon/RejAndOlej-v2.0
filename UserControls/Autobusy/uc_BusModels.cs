@@ -1,6 +1,7 @@
 ﻿using RejAndOlej.Helpers.Controls;
 using RejAndOlej.Helpers.Database;
 using RejAndOlej.Models;
+using RejAndOlej.Service;
 using RejAndOlej.Views.TableViews;
 using System;
 using System.Collections.Generic;
@@ -43,8 +44,8 @@ namespace RejAndOlej.UserControls.Autobusy
         private void initDataGrid()
         {
             List<Bus> buses = context.Buses.ToList();
-            var mainView = BusModelsMainTableView.GetBusModelsView(buses);
-            dataGridViewModelsList.DataSource = mainView;
+            displayList = BusModelsMainTableView.GetBusModelsView(buses);
+            dataGridViewModelsList.DataSource = displayList;
         }
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
@@ -133,6 +134,18 @@ namespace RejAndOlej.UserControls.Autobusy
             groupBoxDataManipulation.Enabled = true;
             DBAction = (int)DBTableActions.Edit;
             initManipulationControls();
+        }
+
+        private void toolStripButtonPrint_Click(object sender, EventArgs e)
+        {
+            if (displayList != null && displayList.Count != 0)
+            {
+                ListPrinter printer = new ListPrinter(displayList);
+
+                printer.Print();
+            }
+            else
+                MessageBox.Show("Brak danych do wydruku!");
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿
 using RejAndOlej.Models;
+using RejAndOlej.Views.TableViews;
+using System.Collections.Generic;
 
 namespace RejAndOlej.UserControls.Autobusy
 {
@@ -46,6 +48,8 @@ namespace RejAndOlej.UserControls.Autobusy
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewModelsList)).BeginInit();
             this.groupBoxDataManipulation.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -159,7 +163,9 @@ namespace RejAndOlej.UserControls.Autobusy
             this.toolStripButtonAdd,
             this.toolStripButtonEdit,
             this.toolStripButtonSave,
-            this.toolStripButtonDelete});
+            this.toolStripButtonDelete,
+            this.toolStripSeparator1,
+            this.toolStripButtonPrint});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(923, 27);
@@ -205,6 +211,22 @@ namespace RejAndOlej.UserControls.Autobusy
             this.toolStripButtonDelete.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonDelete.Text = "toolStripButton7";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButtonPrint
+            // 
+            this.toolStripButtonPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPrint.Image = global::RejAndOlej.Properties.Resources.Print_256;
+            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
+            this.toolStripButtonPrint.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonPrint.Text = "toolStripButton5";
+            this.toolStripButtonPrint.ToolTipText = "Wydrukuj";
+            this.toolStripButtonPrint.Click += new System.EventHandler(this.toolStripButtonPrint_Click);
+            // 
             // uc_BusModels
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -227,7 +249,7 @@ namespace RejAndOlej.UserControls.Autobusy
         }
 
         #endregion
-
+        private ICollection<BusModelsMainTableView> displayList;
         private System.Windows.Forms.DataGridView dataGridViewModelsList;
         private System.Windows.Forms.GroupBox groupBoxDataManipulation;
         private System.Windows.Forms.Label label2;
@@ -249,5 +271,7 @@ namespace RejAndOlej.UserControls.Autobusy
         private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
         private System.Windows.Forms.ToolStripButton toolStripButtonSave;
         private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolStripButtonPrint;
     }
 }

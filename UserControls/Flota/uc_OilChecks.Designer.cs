@@ -1,5 +1,7 @@
 ﻿
 using RejAndOlej.Models;
+using RejAndOlej.Views.TableViews;
+using System.Collections.Generic;
 
 namespace RejAndOlej.UserControls.Flota
 {
@@ -45,6 +47,7 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonSearch = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
             this.gbVehicleData = new System.Windows.Forms.GroupBox();
             this.labelLeftToNextCheck = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -141,7 +144,8 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonSave,
             this.toolStripButtonDelete,
             this.toolStripSeparator1,
-            this.toolStripButtonSearch});
+            this.toolStripButtonSearch,
+            this.toolStripButtonPrint});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(908, 27);
@@ -186,6 +190,7 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonDelete.Name = "toolStripButtonDelete";
             this.toolStripButtonDelete.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonDelete.Text = "toolStripButton7";
+            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
             // toolStripSeparator1
             // 
@@ -201,6 +206,16 @@ namespace RejAndOlej.UserControls.Flota
             this.toolStripButtonSearch.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonSearch.Text = "toolStripButton1";
             this.toolStripButtonSearch.Click += new System.EventHandler(this.toolStripButtonSearch_Click);
+            // 
+            // toolStripButtonPrint
+            // 
+            this.toolStripButtonPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPrint.Image = global::RejAndOlej.Properties.Resources.Print_256;
+            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
+            this.toolStripButtonPrint.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonPrint.Text = "Wydrukuj";
+            this.toolStripButtonPrint.Click += new System.EventHandler(this.toolStripButtonPrint_Click);
             // 
             // gbVehicleData
             // 
@@ -300,6 +315,7 @@ namespace RejAndOlej.UserControls.Flota
         }
 
         #endregion
+        private ICollection<OilChecksMainTableView> displayList;
         private ControlCollection manipulationControls;
         private BusFleet selectedVehicle;
         private RejAndOlejContext context;
@@ -325,5 +341,6 @@ namespace RejAndOlej.UserControls.Flota
         private System.Windows.Forms.ToolStripButton toolStripButtonSearch;
         private System.Windows.Forms.CheckBox cbSetActualMileageAsMileageOnCheck;
         private System.Windows.Forms.Label labelLeftToNextCheck;
+        private System.Windows.Forms.ToolStripButton toolStripButtonPrint;
     }
 }

@@ -143,6 +143,16 @@ namespace RejAndOlej.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Print_256 {
+            get {
+                object obj = ResourceManager.GetObject("Print_256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Save_256 {
             get {
                 object obj = ResourceManager.GetObject("Save_256", resourceCulture);

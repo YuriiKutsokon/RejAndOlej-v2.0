@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RejAndOlej.Views.TableViews
 {
-    class BusMakersMainTAbleView
+    class BusMakersMainTableView
     {
         public int ID { get; set; }
 
@@ -15,25 +15,25 @@ namespace RejAndOlej.Views.TableViews
 
         public string BusMakerNation { get; set; }
 
-        public BusMakersMainTAbleView(BusMaker busMaker)
+        public BusMakersMainTableView(BusMaker busMaker)
         {
             ID = busMaker.BusMakerId;
             BusMakerName = busMaker.Name;
             BusMakerNation = busMaker.Nation;
         }
 
-        public BusMakersMainTAbleView()
+        public BusMakersMainTableView()
         {
 
         }
 
-        public static List<BusMakersMainTAbleView> GetBusMakerViewList(List<BusMaker> busMakers)
+        public static List<BusMakersMainTableView> GetBusMakerViewList(ICollection<BusMaker> busMakers)
         {
-            List<BusMakersMainTAbleView> viewList = new List<BusMakersMainTAbleView>();
+            List<BusMakersMainTableView> viewList = new List<BusMakersMainTableView>();
 
             foreach(BusMaker busMaker in busMakers)
             {
-                viewList.Add(new BusMakersMainTAbleView(busMaker));
+                viewList.Add(new BusMakersMainTableView(busMaker));
             }
 
             return viewList;

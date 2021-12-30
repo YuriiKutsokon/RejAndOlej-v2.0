@@ -16,7 +16,7 @@ namespace RejAndOlej.Service
     {
 
         private ICollection<FleetMainTableView> _dataSourceFleet;
-        private ICollection<BusMakersMainTAbleView> _dataSourceBusMakers;
+        private ICollection<BusMakersMainTableView> _dataSourceBusMakers;
         private ICollection<BusModelsMainTableView> _dataSourceBusModels;
         private ICollection<OilChecksMainTableView> _dataSourceOilChecks;
         private ICollection<RegistrationChecksMainTableView> _dataSourceRegistrationChecks;
@@ -24,7 +24,7 @@ namespace RejAndOlej.Service
         private string _tableHeader = "";
 
         private EnModels.Models _entityType;
-        public ListPrinter(ICollection<BusMakersMainTAbleView> dataList)
+        public ListPrinter(ICollection<BusMakersMainTableView> dataList)
         {
             _dataSourceBusMakers = dataList;
 

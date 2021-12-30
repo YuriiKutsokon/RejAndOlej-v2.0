@@ -28,6 +28,20 @@ namespace RejAndOlej.Helpers.Controls
             {
                 switch (type)
                 {
+                    case nameof(ModelTypes.RejAndOlejModelsBusMaker):
+                        returnObj = new BusMaker();
+                        if (sender.SelectedRows != null && sender.SelectedRows.Count != 0)
+                        {
+                            returnObj = context.BusMakers.Where(b => b.Name ==
+                                Convert.ToString(sender.SelectedRows[0].Cells[nameof(BusMakersMainTableView.BusMakerName)].Value)).FirstOrDefault();
+                        }
+                        else if (sender.SelectedCells != null && sender.SelectedCells.Count != 0)
+                        {
+                            returnObj = context.BusMakers.Where(b => b.Name ==
+                                Convert.ToString(sender.SelectedCells[0].OwningRow.Cells[nameof(BusMakersMainTableView.BusMakerName)].Value)).FirstOrDefault();
+                        }
+                        break;
+
                     case nameof(ModelTypes.RejAndOlejModelsBus):
                         returnObj = new Bus();
                         if (sender.SelectedRows != null && sender.SelectedRows.Count != 0)

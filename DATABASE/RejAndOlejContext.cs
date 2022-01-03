@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using RejAndOlej.Models;
 
 #nullable disable
 
-namespace RejAndOlej.Models
+namespace RejAndOlej.DATABASE
 {
     public partial class RejAndOlejContext : DbContext
     {

@@ -262,7 +262,6 @@ namespace RejAndOlej.UserControls.Autobusy
         private System.Windows.Forms.TextBox textBoxKmToOilCheck;
         private System.Windows.Forms.ComboBox comboBoxBusMaker;
         RejAndOlejContext context = new RejAndOlejContext();
-        private int? DBAction = null;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;

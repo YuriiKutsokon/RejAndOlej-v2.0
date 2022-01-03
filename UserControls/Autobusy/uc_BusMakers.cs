@@ -1,5 +1,4 @@
 ﻿using RejAndOlej.Models;
-using RejAndOlej.Helpers.Database;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +12,7 @@ using RejAndOlej.Views.TableViews;
 using RejAndOlej.Helpers.Controls;
 using RejAndOlej.Service;
 using RejAndOlej.DATABASE;
+using static RejAndOlej.Enums.EnModels;
 
 namespace RejAndOlej.UserControls.Autobusy
 {
@@ -33,7 +33,7 @@ namespace RejAndOlej.UserControls.Autobusy
             dataGridViewBusMakersList.RowStateChanged += (s, e) => initManipulationControls();
             dataGridViewBusMakersList.CellStateChanged += (s, e) => initManipulationControls();
 
-            dataGridViewBusMakersList.DoubleClick += (s, e) => { groupBoxDataManipulation.Enabled = true; DBAction = DBTableActions.Edit; };
+            dataGridViewBusMakersList.DoubleClick += (s, e) => { groupBoxDataManipulation.Enabled = true; DBAction = ModelActions.Edit; };
         }
 
         private void initManipulationControls()
@@ -58,7 +58,7 @@ namespace RejAndOlej.UserControls.Autobusy
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
             groupBoxDataManipulation.Enabled = true;
-            DBAction = DBTableActions.Insert;
+            DBAction = ModelActions.Insert;
 
             textBoxName.Text = "";
             textBoxNation.Text = "";
@@ -78,7 +78,7 @@ namespace RejAndOlej.UserControls.Autobusy
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
             groupBoxDataManipulation.Enabled = true;
-            DBAction = DBTableActions.Edit;
+            DBAction = ModelActions.Edit;
         }
 
         private void toolStripButtonPrint_Click(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace RejAndOlej.UserControls.Autobusy
         {
             if (DBAction != null)
             {
-                if (DBAction == DBTableActions.Edit)
+                if (DBAction == ModelActions.Edit)
                 {
                     var rowToEdit = GridViewHelpers.GetObjectFromDataGridViewRow<BusMaker>(dataGridViewBusMakersList, "");
                     if (textBoxName.Text != "" && textBoxNation.Text != "")
@@ -114,7 +114,7 @@ namespace RejAndOlej.UserControls.Autobusy
                     else
                         MessageBox.Show("Brak danych do wprowadzenia", "brak danych");
                 }
-                else if (DBAction == DBTableActions.Insert)
+                else if (DBAction == ModelActions.Insert)
                 {
                     if (textBoxName.Text != "" && textBoxNation.Text != "")
                     {

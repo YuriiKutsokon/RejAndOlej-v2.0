@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RejAndOlej.Enums
 {
-    class EnModels
+    public class EnModels
     {
         public enum Models
         {
@@ -15,6 +15,13 @@ namespace RejAndOlej.Enums
             BusFleet = 3,
             OilChecks = 4,
             RegistrationChecks = 5
+        }
+
+        public enum ModelActions
+        {
+            Edit,
+            Insert,
+            Delete
         }
     }
 }

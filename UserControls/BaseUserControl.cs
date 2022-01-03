@@ -1,5 +1,4 @@
 ﻿using System;
-using RejAndOlej.Helpers.Database;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RejAndOlej.Enums;
 
 namespace RejAndOlej.UserControls
 {
@@ -23,7 +23,7 @@ namespace RejAndOlej.UserControls
             InitializeComponent();
         }
 
-        protected DBTableActions? DBAction;
+        protected EnModels.ModelActions? DBAction;
         protected string SelectionColumn
         {
             set;

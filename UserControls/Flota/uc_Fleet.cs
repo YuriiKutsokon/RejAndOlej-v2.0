@@ -1,6 +1,6 @@
 ﻿using RejAndOlej.DATABASE;
+using RejAndOlej.Enums;
 using RejAndOlej.Helpers.Controls;
-using RejAndOlej.Helpers.Database;
 using RejAndOlej.Models;
 using RejAndOlej.Service;
 using RejAndOlej.Views.TableViews;
@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace RejAndOlej.UserControls.Flota
 {
@@ -28,21 +29,21 @@ namespace RejAndOlej.UserControls.Flota
 
         protected void RegisterEvents()
         {
-            dataGridViewModelsList.RowStateChanged  += (s, e) => initManipulationControls(DBTableActions.Edit);
-            dataGridViewModelsList.CellStateChanged += (s, e) => initManipulationControls(DBTableActions.Edit);
+            dataGridViewModelsList.RowStateChanged  += (s, e) => initManipulationControls(EnModels.ModelActions.Edit);
+            dataGridViewModelsList.CellStateChanged += (s, e) => initManipulationControls(EnModels.ModelActions.Edit);
 
             toolStripButtonEdit.Click += (s, e) => SetEditMode();
             dataGridViewModelsList.DoubleClick += (s, e) => SetEditMode();
         }
 
-        protected void initManipulationControls(DBTableActions? mode)
+        protected void initManipulationControls(EnModels.ModelActions? mode)
         {
             BusFleet vehicle = GridViewHelpers.GetObjectFromDataGridViewRow<BusFleet>
                                                                         (dataGridViewModelsList, SelectionColumn);
 
             switch (mode)
             {
-                case DBTableActions.Edit:
+                case EnModels.ModelActions.Edit:
                     if (vehicle != null && vehicle.FleetVehicleId != 0)
                     {
                         textBoxRegNum.Text = vehicle.RegistrationNumber;
@@ -52,7 +53,7 @@ namespace RejAndOlej.UserControls.Flota
                         comboBoxBusMakerModels.Text = vehicle.Bus.ModelName;
                     }
                 break;
-                case DBTableActions.Insert:
+                case EnModels.ModelActions.Insert:
                     if (vehicle != null && vehicle.FleetVehicleId != 0)
                     {
                         textBoxRegNum.Text = string.Empty;
@@ -90,7 +91,7 @@ namespace RejAndOlej.UserControls.Flota
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
             groupBoxDataManipulation.Enabled = true;
-            DBAction = DBTableActions.Insert;
+            DBAction = EnModels.ModelActions.Insert;
             initManipulationControls(DBAction);
         }
 
@@ -112,7 +113,7 @@ namespace RejAndOlej.UserControls.Flota
         private void SetEditMode()
         {
             groupBoxDataManipulation.Enabled = true;
-            DBAction = DBTableActions.Edit;
+            DBAction = EnModels.ModelActions.Edit;
             initManipulationControls(DBAction);
         }
 
@@ -120,7 +121,7 @@ namespace RejAndOlej.UserControls.Flota
         {
             if (DBAction != null)
             {
-                if (DBAction == DBTableActions.Edit)
+                if (DBAction == EnModels.ModelActions.Edit)
                 {
                     BusFleet vehicleToEdit = GridViewHelpers.GetObjectFromDataGridViewRow<BusFleet>
                                             (dataGridViewModelsList, SelectionColumn);
@@ -141,7 +142,7 @@ namespace RejAndOlej.UserControls.Flota
                     else
                         MessageBox.Show("Nie wszyskie pola są wypełnione!", "brak danych");
                 }
-                else if(DBAction == DBTableActions.Insert)
+                else if(DBAction == EnModels.ModelActions.Insert)
                 {
                     BusFleet vehicleToInsert = new BusFleet();
                     int newFleetVehicleId = context.BusFleets.OrderBy(bf => bf.FleetVehicleId).Last().FleetVehicleId + 1;

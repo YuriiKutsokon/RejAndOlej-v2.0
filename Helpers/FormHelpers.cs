@@ -1,5 +1,5 @@
-﻿using RejAndOlej.Helpers.Controls;
-using RejAndOlej.Helpers.Database;
+﻿using RejAndOlej.Enums;
+using RejAndOlej.Helpers.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +11,16 @@ namespace RejAndOlej.Helpers
 {
     class FormHelpers
     {
-        public static void EnableManipulationControls(DBTableActions action, Control.ControlCollection controls)
+        public static void EnableManipulationControls(EnModels.ModelActions action, Control.ControlCollection controls)
         {
             switch (action)
             {
-                case DBTableActions.Insert:
+                case EnModels.ModelActions.Insert:
                     ControlsHelpers.EnableControls(controls, true);
                     ControlsHelpers.ClearControls(controls);
                     break;
 
-                case DBTableActions.Edit:
+                case EnModels.ModelActions.Edit:
                     ControlsHelpers.EnableControls(controls, true);
                     break;
             }

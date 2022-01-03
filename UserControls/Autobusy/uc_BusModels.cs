@@ -1,6 +1,6 @@
 ﻿using RejAndOlej.DATABASE;
+using RejAndOlej.Enums;
 using RejAndOlej.Helpers.Controls;
-using RejAndOlej.Helpers.Database;
 using RejAndOlej.Models;
 using RejAndOlej.Service;
 using RejAndOlej.Views.TableViews;
@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace RejAndOlej.UserControls.Autobusy
 {
-    public partial class uc_BusModels : UserControl
+    public partial class uc_BusModels : BaseUserControl
     {
         public uc_BusModels()
         {
@@ -52,26 +52,26 @@ namespace RejAndOlej.UserControls.Autobusy
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
             groupBoxDataManipulation.Enabled = true;
-            DBAction = (int)DBTableActions.Insert;
+            DBAction = EnModels.ModelActions.Insert;
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
             groupBoxDataManipulation.Enabled = true;
-            DBAction = (int)DBTableActions.Edit;
+            DBAction = EnModels.ModelActions.Edit;
         }
 
         private void dataGridViewModelsList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             groupBoxDataManipulation.Enabled = true;
-            DBAction = (int)DBTableActions.Edit;
+            DBAction = EnModels.ModelActions.Edit;
         }
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
         {
             if (DBAction != null)
             {
-                if (DBAction == (int)DBTableActions.Edit)
+                if (DBAction == EnModels.ModelActions.Edit)
                 {
                     Bus rowToEdit = GridViewHelpers.GetObjectFromDataGridViewRow<Bus>(dataGridViewModelsList, "ModelName");
                     if (!(String.IsNullOrEmpty(textBoxName.Text) && String.IsNullOrEmpty(textBoxDaysToCheck.Text) &&
@@ -91,7 +91,7 @@ namespace RejAndOlej.UserControls.Autobusy
                     else
                         MessageBox.Show("Brak danych do wprowadzenia", "brak danych");
                 }
-                else if (DBAction == (int)DBTableActions.Insert)
+                else if (DBAction == EnModels.ModelActions.Insert)
                 {
                     if (!(String.IsNullOrEmpty(textBoxName.Text) && String.IsNullOrEmpty(textBoxDaysToCheck.Text) &&
                         String.IsNullOrEmpty(textBoxKmToOilCheck.Text) && String.IsNullOrEmpty(comboBoxBusMaker.Text)))
@@ -135,7 +135,7 @@ namespace RejAndOlej.UserControls.Autobusy
         private void SetEditMode()
         {
             groupBoxDataManipulation.Enabled = true;
-            DBAction = (int)DBTableActions.Edit;
+            DBAction = (int)EnModels.ModelActions.Edit;
             initManipulationControls();
         }
 

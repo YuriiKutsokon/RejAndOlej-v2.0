@@ -13,7 +13,6 @@ using RejAndOlej.Forms.CreationForms;
 using RejAndOlej.Forms.SearchingTables;
 using RejAndOlej.Helpers;
 using RejAndOlej.Helpers.Controls;
-using RejAndOlej.Helpers.Database;
 using RejAndOlej.Models;
 using RejAndOlej.Service;
 using RejAndOlej.Views.TableViews;
@@ -39,7 +38,7 @@ namespace RejAndOlej.UserControls.Flota
             dataGridViewRegistrationChecksList.RowStateChanged += (s, e) => initManipulationControls();
             dataGridViewRegistrationChecksList.CellStateChanged += (s, e) => initManipulationControls();
 
-            dataGridViewRegistrationChecksList.DoubleClick += (s, e) => { FormHelpers.EnableManipulationControls(DBTableActions.Edit, manipulationControls); DBAction = DBTableActions.Edit; };
+            dataGridViewRegistrationChecksList.DoubleClick += (s, e) => { FormHelpers.EnableManipulationControls(EnModels.ModelActions.Edit, manipulationControls); DBAction = EnModels.ModelActions.Edit; };
         }
 
         private void initDataGridView()
@@ -139,14 +138,14 @@ namespace RejAndOlej.UserControls.Flota
                 }
             }
 
-            DBAction = DBTableActions.Insert;
+            DBAction = EnModels.ModelActions.Insert;
             initDataGridView();
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            FormHelpers.EnableManipulationControls(DBTableActions.Edit, manipulationControls);
-            DBAction = DBTableActions.Edit;
+            FormHelpers.EnableManipulationControls(EnModels.ModelActions.Edit, manipulationControls);
+            DBAction = EnModels.ModelActions.Edit;
         }
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
@@ -158,10 +157,10 @@ namespace RejAndOlej.UserControls.Flota
                     RegistrationCheck check = GridViewHelpers.GetObjectFromDataGridViewRow<RegistrationCheck>(dataGridViewRegistrationChecksList, "");
                     switch (DBAction)
                     {
-                        case DBTableActions.Insert:
+                        case EnModels.ModelActions.Insert:
                             break;
 
-                        case DBTableActions.Edit:
+                        case EnModels.ModelActions.Edit:
                             if (!HasEmptyControl(groupBoxDataManipulation.Controls))
                             {
                                 tempContext.Update(check);

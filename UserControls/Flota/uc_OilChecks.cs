@@ -2,7 +2,6 @@
 using RejAndOlej.Forms.SearchingTables;
 using RejAndOlej.Helpers;
 using RejAndOlej.Helpers.Controls;
-using RejAndOlej.Helpers.Database;
 using RejAndOlej.Models;
 using RejAndOlej.Views.TableViews;
 using System;
@@ -39,7 +38,7 @@ namespace RejAndOlej.UserControls.Flota
             dataGridViewOilChecksList.RowStateChanged += (s, e) => initManipulationControls();
             dataGridViewOilChecksList.CellStateChanged += (s, e) => initManipulationControls();
 
-            dataGridViewOilChecksList.DoubleClick += (s, e) => { FormHelpers.EnableManipulationControls(DBTableActions.Edit, manipulationControls); DBAction = DBTableActions.Edit; };
+            dataGridViewOilChecksList.DoubleClick += (s, e) => { FormHelpers.EnableManipulationControls(EnModels.ModelActions.Edit, manipulationControls); DBAction = EnModels.ModelActions.Edit; };
         }
 
         private void initDataGridView()
@@ -137,14 +136,14 @@ namespace RejAndOlej.UserControls.Flota
                 }
             }
             
-            DBAction = DBTableActions.Insert;
+            DBAction = EnModels.ModelActions.Insert;
             initDataGridView();
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            FormHelpers.EnableManipulationControls(DBTableActions.Edit, manipulationControls);
-            DBAction = DBTableActions.Edit;
+            FormHelpers.EnableManipulationControls(EnModels.ModelActions.Edit, manipulationControls);
+            DBAction = EnModels.ModelActions.Edit;
         }
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
@@ -154,10 +153,10 @@ namespace RejAndOlej.UserControls.Flota
                 OilCheck check = GridViewHelpers.GetObjectFromDataGridViewRow<OilCheck>(dataGridViewOilChecksList, "");
                 switch (DBAction)
                 {
-                    case DBTableActions.Insert:
+                    case EnModels.ModelActions.Insert:
                         break;
 
-                    case DBTableActions.Edit:
+                    case EnModels.ModelActions.Edit:
                         if (!HasEmptyControl(groupBoxDataManipulation.Controls))
                         {
                             using (RejAndOlejContext tempContext = new RejAndOlejContext())

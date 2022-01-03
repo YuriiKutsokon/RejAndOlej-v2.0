@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace RejAndOlej
 {
-    partial class Main
+    partial class frm_Main
     {
         /// <summary>
         ///  Required designer variable.

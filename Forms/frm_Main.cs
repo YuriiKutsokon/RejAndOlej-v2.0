@@ -14,9 +14,9 @@ using System.Windows.Forms;
 
 namespace RejAndOlej
 {
-    public partial class Main : Form
+    public partial class frm_Main : Form
     {
-        public Main()
+        public frm_Main()
         {
             InitializeComponent();
             registerEvents();

@@ -1,4 +1,6 @@
-﻿using RejAndOlej.Helpers.Controls;
+﻿
+using RejAndOlej.DATABASE;
+using RejAndOlej.Helpers.Controls;
 using RejAndOlej.UserControls.Autobusy;
 using RejAndOlej.UserControls.Flota;
 using System;
@@ -20,6 +22,8 @@ namespace RejAndOlej
         {
             InitializeComponent();
             registerEvents();
+
+            context = new RejAndOlejContext();
         }
 
         private void registerEvents()
@@ -29,6 +33,11 @@ namespace RejAndOlej
             menuItemListaPojazdow.Click += (s, e) => CreateTabPage(menuItemListaPojazdow);
             menuItemPrzegladyOlejowe.Click += (s, e) => CreateTabPage(menuItemPrzegladyOlejowe);
             menuItemPrzegladyRejestracyjne.Click += (s, e) => CreateTabPage(menuItemPrzegladyRejestracyjne);
+        }
+
+        public void updateDataGridViews()
+        {
+
         }
 
         private void CreateTabPage(ToolStripMenuItem item)

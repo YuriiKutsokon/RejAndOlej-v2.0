@@ -58,11 +58,15 @@ namespace RejAndOlej.UserControls.Flota
                     {
                         labelLeftToNextCheck.ForeColor = Color.Green;
                         labelLeftToNextCheck.Text = "Do następnego przeglądu: " + Convert.ToString(lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection - fromLastCheck) + " km";
+                        lastCheck.FleetVechicle.HasValidOilCheck = true;
+                        ContextHelpers.SaveModelObject(lastCheck);
                     }
                     else
                     {
                         labelLeftToNextCheck.ForeColor = Color.Red;
                         labelLeftToNextCheck.Text = "Przegląd spóżniony! Przegląd przeterminowany na " + Convert.ToString(fromLastCheck - lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection);
+                        lastCheck.FleetVechicle.HasValidOilCheck = false;
+                        ContextHelpers.SaveModelObject(lastCheck);
                     }
                 }
                 else
@@ -159,13 +163,9 @@ namespace RejAndOlej.UserControls.Flota
                     case EnModels.ModelActions.Edit:
                         if (!HasEmptyControl(groupBoxDataManipulation.Controls))
                         {
-                            using (RejAndOlejContext tempContext = new RejAndOlejContext())
-                            {
-                                tempContext.Update(check);
-                                check.MileageOnOilCheck = Convert.ToInt64(textBoxMileageOnCheck.Text);
-                                check.DateOfOilCheck = dateTimeOilCheck.Value;
-                                tempContext.SaveChanges();
-                            }
+                            check.MileageOnOilCheck = Convert.ToInt64(textBoxMileageOnCheck.Text);
+                            check.DateOfOilCheck = dateTimeOilCheck.Value;
+                            ContextHelpers.SaveModelObject(check);
                         }
                         initDataGridView();
                         break;

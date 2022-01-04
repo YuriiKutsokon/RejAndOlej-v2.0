@@ -64,6 +64,10 @@ namespace RejAndOlej.DATABASE
                     .HasColumnName("registrationNumber")
                     .IsFixedLength(true);
 
+                entity.Property(e => e.HasValidOilCheck).HasColumnType("bit").HasColumnName("hasValidOilCheck").IsRequired(false);
+
+                entity.Property(e => e.HasValidRegCheck).HasColumnType("bit").HasColumnName("hasValidRegCheck").IsRequired(false);
+
                 entity.HasOne(d => d.Bus)
                     .WithMany(p => p.BusFleets)
                     .HasForeignKey(d => d.BusId)

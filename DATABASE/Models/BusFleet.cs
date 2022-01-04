@@ -21,6 +21,8 @@ namespace RejAndOlej.Models
         public string RegistrationNumber { get; set; }
         public string RaceNumber { get; set; }
         public DateTime? DateOfEnterToFleet { get; set; }
+        public bool? HasValidOilCheck { get; set; }
+        public bool? HasValidRegCheck { get; set; }
 
         private Bus _bus;
         private ICollection<OilCheck> _oilChecks;

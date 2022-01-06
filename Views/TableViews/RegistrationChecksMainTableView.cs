@@ -27,14 +27,5 @@ namespace RejAndOlej.Views.TableViews
             PrzebiegNaMomentPrzegladu = regCheck.MileageOnRegCheck.ToString();
         }
 
-        public static ICollection<RegistrationChecksMainTableView> GetRegistrationChecksListView(ICollection<RegistrationCheck> checks)
-        {
-            ICollection<RegistrationChecksMainTableView> listView = new List<RegistrationChecksMainTableView>();
-            foreach (RegistrationCheck check in checks)
-            {
-                listView.Add(new RegistrationChecksMainTableView(check));
-            }
-            return listView;
-        }
     }
 }

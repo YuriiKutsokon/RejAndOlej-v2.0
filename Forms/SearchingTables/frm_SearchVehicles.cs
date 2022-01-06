@@ -1,4 +1,5 @@
 ﻿using RejAndOlej.DATABASE;
+using RejAndOlej.Helpers;
 using RejAndOlej.Helpers.Controls;
 using RejAndOlej.Models;
 using RejAndOlej.Views.TableViews;
@@ -38,7 +39,7 @@ namespace RejAndOlej.Forms.SearchingTables
         {
             if (vehiclesList != null)
             {
-                var viewList = FleetMainTableView.GetFleetView(vehiclesList);
+                var viewList = TableViewHelpers.GetView<FleetMainTableView>(vehiclesList);
                 dgvVehicles.DataSource = viewList;
             }
         }

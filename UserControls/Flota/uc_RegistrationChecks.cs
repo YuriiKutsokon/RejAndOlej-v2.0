@@ -46,7 +46,7 @@ namespace RejAndOlej.UserControls.Flota
             if (selectedVehicle != null)
             {
                 ICollection<RegistrationCheck> checkslist = selectedVehicle.RegistrationChecks;
-                displayList = RegistrationChecksMainTableView.GetRegistrationChecksListView(checkslist);
+                displayList = TableViewHelpers.GetView<RegistrationChecksMainTableView>(checkslist);
                 dataGridViewRegistrationChecksList.DataSource = displayList;
 
                 if (checkslist.Count != 0)

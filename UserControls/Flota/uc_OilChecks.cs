@@ -46,7 +46,7 @@ namespace RejAndOlej.UserControls.Flota
             if (selectedVehicle != null)
             {
                 ICollection<OilCheck> oilCheckList = selectedVehicle.OilChecks;
-                displayList = OilChecksMainTableView.GetOilChecksView(oilCheckList);
+                displayList = TableViewHelpers.GetView<OilChecksMainTableView>(oilCheckList);
                 dataGridViewOilChecksList.DataSource = displayList;
 
                 if (oilCheckList.Count != 0)

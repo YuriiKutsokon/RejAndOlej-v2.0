@@ -12,7 +12,6 @@ namespace RejAndOlej.Views.TableViews
         public string NumerRejestracyjny { get; set; }
         public DateTime? DataPrzegladu { get; set; }
         public string PrzebiegNaMomentPrzegladu { get; set; }
-        //public string StanPojazdu { get; set; }
 
         public OilChecksMainTableView()
         {
@@ -28,14 +27,5 @@ namespace RejAndOlej.Views.TableViews
             PrzebiegNaMomentPrzegladu = oilCheck.MileageOnOilCheck.ToString();
         }
 
-        public static ICollection<OilChecksMainTableView>GetOilChecksView(ICollection<OilCheck> checks)
-        {
-            ICollection<OilChecksMainTableView> CheckList = new List<OilChecksMainTableView>();
-            foreach(OilCheck check in checks)
-            {
-                CheckList.Add(new OilChecksMainTableView(check));
-            }
-            return CheckList;
-        }
     }
 }

@@ -29,17 +29,6 @@ namespace RejAndOlej.Views.TableViews
 
         }
 
-        public static List<BusMakersMainTableView> GetBusMakerViewList(ICollection<BusMaker> busMakers)
-        {
-            List<BusMakersMainTableView> viewList = new List<BusMakersMainTableView>();
-
-            foreach(BusMaker busMaker in busMakers)
-            {
-                viewList.Add(new BusMakersMainTableView(busMaker));
-            }
-
-            return viewList;
-        }
 
     }
 }

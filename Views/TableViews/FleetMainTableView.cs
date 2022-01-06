@@ -34,16 +34,6 @@ namespace RejAndOlej.Views.TableViews
 
         }
 
-        public static ICollection<FleetMainTableView> GetFleetView(ICollection<BusFleet> fleet)
-        {
-            ICollection<FleetMainTableView> fleetList = new List<FleetMainTableView>();
-            foreach (BusFleet vehicle in fleet)
-            {
-                fleetList.Add(new FleetMainTableView(vehicle));
-            }
-
-            return fleetList;
-        }
     }
 
 }

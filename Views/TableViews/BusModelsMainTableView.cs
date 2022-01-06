@@ -36,17 +36,6 @@ namespace RejAndOlej.Views.TableViews
 
         }
 
-        public static List<BusModelsMainTableView> GetBusModelsView(List<Bus> buses)
-        {
-            List<BusModelsMainTableView> viewList = new List<BusModelsMainTableView>();
-
-            foreach (Bus bus in buses)
-            {
-                viewList.Add(new BusModelsMainTableView(bus));
-            }
-
-            return viewList;
-        }
         
     }
 }

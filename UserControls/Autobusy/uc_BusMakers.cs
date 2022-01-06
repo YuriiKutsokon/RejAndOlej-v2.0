@@ -13,6 +13,7 @@ using RejAndOlej.Helpers.Controls;
 using RejAndOlej.Service;
 using RejAndOlej.DATABASE;
 using static RejAndOlej.Enums.EnModels;
+using RejAndOlej.Helpers;
 
 namespace RejAndOlej.UserControls.Autobusy
 {
@@ -51,7 +52,7 @@ namespace RejAndOlej.UserControls.Autobusy
         private void initDataGrid()
         {
             ICollection<BusMaker> busMakersList = context.BusMakers.ToList();
-            displayList = BusMakersMainTableView.GetBusMakerViewList(busMakersList);
+            displayList = TableViewHelpers.GetView<BusMakersMainTableView>(busMakersList);
             dataGridViewBusMakersList.DataSource = displayList;
         }
 

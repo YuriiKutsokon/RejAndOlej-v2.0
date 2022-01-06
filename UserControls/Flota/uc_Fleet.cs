@@ -1,5 +1,6 @@
 ﻿using RejAndOlej.DATABASE;
 using RejAndOlej.Enums;
+using RejAndOlej.Helpers;
 using RejAndOlej.Helpers.Controls;
 using RejAndOlej.Models;
 using RejAndOlej.Service;
@@ -73,7 +74,7 @@ namespace RejAndOlej.UserControls.Flota
         protected void initDataGridView()
         {
             ICollection<BusFleet> fleetVechicles = context.BusFleets.ToList();
-            displayList = FleetMainTableView.GetFleetView(fleetVechicles);
+            displayList = TableViewHelpers.GetView<FleetMainTableView>(fleetVechicles);
             dataGridViewModelsList.DataSource = displayList;
         }
 

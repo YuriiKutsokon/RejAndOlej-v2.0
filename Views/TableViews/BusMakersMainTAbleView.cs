@@ -15,8 +15,10 @@ namespace RejAndOlej.Views.TableViews
 
         public string BusMakerNation { get; set; }
 
-        public BusMakersMainTableView(BusMaker busMaker)
+        public BusMakersMainTableView(object model)
         {
+            BusMaker busMaker = model as BusMaker;
+
             ID = busMaker.BusMakerId;
             BusMakerName = busMaker.Name;
             BusMakerNation = busMaker.Nation;
@@ -38,5 +40,6 @@ namespace RejAndOlej.Views.TableViews
 
             return viewList;
         }
+
     }
 }

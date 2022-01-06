@@ -18,8 +18,10 @@ namespace RejAndOlej.Views.TableViews
 
         }
 
-        public RegistrationChecksMainTableView(RegistrationCheck regCheck)
+        public RegistrationChecksMainTableView(object model)
         {
+            RegistrationCheck regCheck = model as RegistrationCheck;
+
             NumerRejestracyjny = regCheck.FleetVehicle.RegistrationNumber;
             DataPrzegladu = regCheck.DateOfRegCheck;
             PrzebiegNaMomentPrzegladu = regCheck.MileageOnRegCheck.ToString();

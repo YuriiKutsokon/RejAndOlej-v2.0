@@ -1,5 +1,6 @@
 ﻿
 using RejAndOlej.DATABASE;
+using RejAndOlej.Helpers;
 using RejAndOlej.Helpers.Controls;
 using RejAndOlej.Models;
 using RejAndOlej.UserControls.Autobusy;
@@ -42,11 +43,11 @@ namespace RejAndOlej
         {
             ICollection<BusFleet> listOilVehicles = context.BusFleets.Where(v => v.OilCheckStatus == Enums.EnChecks.CheckStatuses.NotValid ||
                 v.OilCheckStatus == Enums.EnChecks.CheckStatuses.Nearby).ToList();
-            dataGridViewOilCheckDeadlines.DataSource = FleetMainTableView.GetFleetView(listOilVehicles);
+            dataGridViewOilCheckDeadlines.DataSource = TableViewHelpers.GetView<FleetMainTableView>(listOilVehicles);
 
             ICollection<BusFleet> listRegVehicles = context.BusFleets.Where(v => v.RegCheckStatus == Enums.EnChecks.CheckStatuses.NotValid ||
                 v.RegCheckStatus == Enums.EnChecks.CheckStatuses.Nearby).ToList();
-            dataGridViewRegistrationDeadlines.DataSource = FleetMainTableView.GetFleetView(listRegVehicles);
+            dataGridViewRegistrationChecksDeadlines.DataSource = TableViewHelpers.GetView<FleetMainTableView>(listRegVehicles);
         }
 
         private void CreateTabPage(ToolStripMenuItem item)
@@ -96,11 +97,6 @@ namespace RejAndOlej
             TabPageHeleprs.createTabCloseButton(tabControlInnerForms, e);
         }
 
-        private void tabControlInnerForms_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void Main_Load(object sender, EventArgs e)
         {
             tabControlInnerForms.DrawMode = TabDrawMode.OwnerDrawFixed;
@@ -134,20 +130,54 @@ namespace RejAndOlej
 
         }
 
-        private void dataGridViewOilCheckDeadlines_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        private void dataGridViewOilCheckDeadlines_Paint(object sender, PaintEventArgs e)
         {
-            var oilChecks = dataGridViewOilCheckDeadlines.DataSource as List<BusFleet>;
-
-            DataGridViewCellStyle style = new DataGridViewCellStyle();
-            style.BackColor = Color.Red;
-
-            if (oilChecks != null)
+            for (int i = 0; i < dataGridViewOilCheckDeadlines.RowCount; i++)
             {
-                if (oilChecks[e.RowIndex].OilCheckStatus == Enums.EnChecks.CheckStatuses.NotValid)
-                    dataGridViewOilCheckDeadlines.Rows[e.RowIndex].DefaultCellStyle = style;
+                var oilChecksView = dataGridViewOilCheckDeadlines.DataSource as ICollection<FleetMainTableView>;
+                List<BusFleet> oilChecks = (List<BusFleet>)TableViewHelpers.GetModelObjectList(oilChecksView);
+
+                if (oilChecks != null)
+                {
+                    if (oilChecks[i].OilCheckStatus == Enums.EnChecks.CheckStatuses.NotValid)
+                    {
+                        DataGridViewCellStyle style = new DataGridViewCellStyle();
+                        style.BackColor = Color.Salmon;
+                        dataGridViewOilCheckDeadlines.Rows[i].DefaultCellStyle = style;
+                    }
+                    else if (oilChecks[i].OilCheckStatus == Enums.EnChecks.CheckStatuses.Nearby)
+                    {
+                        DataGridViewCellStyle style = new DataGridViewCellStyle();
+                        style.BackColor = Color.Orange;
+                        dataGridViewOilCheckDeadlines.Rows[i].DefaultCellStyle = style;
+                    }
+                }
             }
         }
 
-        
+        private void dataGridViewRegistrationChecksDeadlines_Paint(object sender, PaintEventArgs e)
+        {
+            for (int i = 0; i < dataGridViewRegistrationChecksDeadlines.RowCount; i++)
+            {
+                var regChecksView = dataGridViewRegistrationChecksDeadlines.DataSource as ICollection<FleetMainTableView>;
+                List<BusFleet> regChecks = (List<BusFleet>)TableViewHelpers.GetModelObjectList(regChecksView);
+
+                if (regChecks != null)
+                {
+                    if (regChecks[i].RegCheckStatus == Enums.EnChecks.CheckStatuses.NotValid)
+                    {
+                        DataGridViewCellStyle style = new DataGridViewCellStyle();
+                        style.BackColor = Color.Salmon;
+                        dataGridViewRegistrationChecksDeadlines.Rows[i].DefaultCellStyle = style;
+                    }
+                    else if (regChecks[i].RegCheckStatus == Enums.EnChecks.CheckStatuses.Nearby)
+                    {
+                        DataGridViewCellStyle style = new DataGridViewCellStyle();
+                        style.BackColor = Color.Orange;
+                        dataGridViewRegistrationChecksDeadlines.Rows[i].DefaultCellStyle = style;
+                    }
+                }
+            }
+        }
     }
 }

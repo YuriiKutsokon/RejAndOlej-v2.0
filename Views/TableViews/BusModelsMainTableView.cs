@@ -20,8 +20,10 @@ namespace RejAndOlej.Views.TableViews
         public long? DefaultKmToCheck { set; get; }
 
 
-        public BusModelsMainTableView(Bus busModel)
+        public BusModelsMainTableView(object model)
         {
+            Bus busModel = model as Bus;
+
             ID = busModel.BusId;
             BusMakerName = busModel.BusMaker.Name;
             ModelName = busModel.ModelName;

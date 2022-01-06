@@ -21,8 +21,10 @@ namespace RejAndOlej.Views.TableViews
 
         }
 
-        public FleetMainTableView(BusFleet fleet)
+        public FleetMainTableView(object model)
         {
+            BusFleet fleet = model as BusFleet;
+
             ID = fleet.FleetVehicleId;
             RegistrationNumber = fleet.RegistrationNumber;
             RaceNumber = fleet.RaceNumber;

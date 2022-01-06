@@ -19,8 +19,10 @@ namespace RejAndOlej.Views.TableViews
 
         }
 
-        public OilChecksMainTableView(OilCheck oilCheck)
+        public OilChecksMainTableView(object model)
         {
+            OilCheck oilCheck = model as OilCheck;
+
             NumerRejestracyjny = oilCheck.FleetVechicle.RegistrationNumber;
             DataPrzegladu = oilCheck.DateOfOilCheck;
             PrzebiegNaMomentPrzegladu = oilCheck.MileageOnOilCheck.ToString();

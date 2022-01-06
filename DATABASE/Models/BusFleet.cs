@@ -1,4 +1,5 @@
 ﻿using RejAndOlej.DATABASE;
+using RejAndOlej.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,8 @@ namespace RejAndOlej.Models
         public string RegistrationNumber { get; set; }
         public string RaceNumber { get; set; }
         public DateTime? DateOfEnterToFleet { get; set; }
-        public bool? HasValidOilCheck { get; set; }
-        public bool? HasValidRegCheck { get; set; }
+        public EnChecks.CheckStatuses? OilCheckStatus { get; set; }
+        public EnChecks.CheckStatuses? RegCheckStatus { get; set; }
 
         private Bus _bus;
         private ICollection<OilCheck> _oilChecks;

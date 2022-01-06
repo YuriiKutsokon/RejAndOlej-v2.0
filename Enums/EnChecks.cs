@@ -13,6 +13,14 @@ namespace RejAndOlej.Enums
             Oil = 1,
             Registration = 2
         }
+
+        public enum CheckStatuses
+        {
+            HasNoCheck = 0,
+            Nearby = 1, 
+            Valid = 2,
+            NotValid = 3
+        }
     }
 
 

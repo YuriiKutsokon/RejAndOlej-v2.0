@@ -48,13 +48,13 @@ namespace RejAndOlej
             this.tabPageOilChecks = new System.Windows.Forms.TabPage();
             this.dataGridViewOilCheckDeadlines = new System.Windows.Forms.DataGridView();
             this.tabPageRegistrationChecks = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewRegistrationDeadlines = new System.Windows.Forms.DataGridView();
             this.mainMenuStrip.SuspendLayout();
             this.tabControlCheckDeadlines.SuspendLayout();
             this.tabPageOilChecks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOilCheckDeadlines)).BeginInit();
             this.tabPageRegistrationChecks.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRegistrationDeadlines)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -181,26 +181,27 @@ namespace RejAndOlej
             this.dataGridViewOilCheckDeadlines.RowTemplate.Height = 25;
             this.dataGridViewOilCheckDeadlines.Size = new System.Drawing.Size(352, 423);
             this.dataGridViewOilCheckDeadlines.TabIndex = 0;
+            this.dataGridViewOilCheckDeadlines.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridViewOilCheckDeadlines_RowPrePaint);
             // 
             // tabPageRegistrationChecks
             // 
-            this.tabPageRegistrationChecks.Controls.Add(this.dataGridView1);
+            this.tabPageRegistrationChecks.Controls.Add(this.dataGridViewRegistrationDeadlines);
             this.tabPageRegistrationChecks.Location = new System.Drawing.Point(4, 24);
             this.tabPageRegistrationChecks.Name = "tabPageRegistrationChecks";
             this.tabPageRegistrationChecks.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRegistrationChecks.Size = new System.Drawing.Size(358, 399);
+            this.tabPageRegistrationChecks.Size = new System.Drawing.Size(358, 429);
             this.tabPageRegistrationChecks.TabIndex = 1;
             this.tabPageRegistrationChecks.Text = "Przeglądy rejestracyjne";
             this.tabPageRegistrationChecks.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataGridViewRegistrationDeadlines
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(352, 393);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridViewRegistrationDeadlines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRegistrationDeadlines.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewRegistrationDeadlines.Name = "dataGridViewRegistrationDeadlines";
+            this.dataGridViewRegistrationDeadlines.RowTemplate.Height = 25;
+            this.dataGridViewRegistrationDeadlines.Size = new System.Drawing.Size(352, 423);
+            this.dataGridViewRegistrationDeadlines.TabIndex = 0;
             // 
             // frm_Main
             // 
@@ -222,7 +223,7 @@ namespace RejAndOlej
             this.tabPageOilChecks.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOilCheckDeadlines)).EndInit();
             this.tabPageRegistrationChecks.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRegistrationDeadlines)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,7 +246,7 @@ namespace RejAndOlej
         private TabPage tabPageOilChecks;
         private DataGridView dataGridViewOilCheckDeadlines;
         private TabPage tabPageRegistrationChecks;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewRegistrationDeadlines;
     }
 }
 

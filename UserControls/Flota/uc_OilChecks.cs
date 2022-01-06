@@ -54,18 +54,25 @@ namespace RejAndOlej.UserControls.Flota
                     var lastCheck = oilCheckList.Last();
 
                     long? fromLastCheck = Convert.ToInt64(tbMileage.Text) - lastCheck.MileageOnOilCheck;
-                    if (fromLastCheck < lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection)
+                    if (fromLastCheck < lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection && (lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection - fromLastCheck) < 3000)
+                    {
+                        labelLeftToNextCheck.ForeColor = Color.Orange;
+                        labelLeftToNextCheck.Text = "Do następnego przeglądu: " + Convert.ToString(lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection - fromLastCheck) + " km";
+                        lastCheck.FleetVechicle.OilCheckStatus = EnChecks.CheckStatuses.Nearby;
+                        ContextHelpers.SaveModelObject(lastCheck);
+                    }
+                    else if (fromLastCheck < lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection)
                     {
                         labelLeftToNextCheck.ForeColor = Color.Green;
                         labelLeftToNextCheck.Text = "Do następnego przeglądu: " + Convert.ToString(lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection - fromLastCheck) + " km";
-                        lastCheck.FleetVechicle.HasValidOilCheck = true;
+                        lastCheck.FleetVechicle.OilCheckStatus = EnChecks.CheckStatuses.Valid;
                         ContextHelpers.SaveModelObject(lastCheck);
                     }
-                    else
+                    else 
                     {
                         labelLeftToNextCheck.ForeColor = Color.Red;
                         labelLeftToNextCheck.Text = "Przegląd spóżniony! Przegląd przeterminowany na " + Convert.ToString(fromLastCheck - lastCheck.FleetVechicle.Bus.DefaultKmToOilInspection);
-                        lastCheck.FleetVechicle.HasValidOilCheck = false;
+                        lastCheck.FleetVechicle.OilCheckStatus = EnChecks.CheckStatuses.NotValid;
                         ContextHelpers.SaveModelObject(lastCheck);
                     }
                 }
@@ -73,6 +80,8 @@ namespace RejAndOlej.UserControls.Flota
                 {
                     labelLeftToNextCheck.ForeColor = Color.Red;
                     labelLeftToNextCheck.Text = "Pojazd jezcze nie ma wprowadzonych przeglądów olejowych!";
+                    selectedVehicle.OilCheckStatus = EnChecks.CheckStatuses.HasNoCheck;
+                    ContextHelpers.SaveModelObject(selectedVehicle);
                 }
             }
             else

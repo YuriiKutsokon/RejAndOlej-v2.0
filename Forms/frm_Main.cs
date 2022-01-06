@@ -1,8 +1,10 @@
 ﻿
 using RejAndOlej.DATABASE;
 using RejAndOlej.Helpers.Controls;
+using RejAndOlej.Models;
 using RejAndOlej.UserControls.Autobusy;
 using RejAndOlej.UserControls.Flota;
+using RejAndOlej.Views.TableViews;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +26,7 @@ namespace RejAndOlej
             registerEvents();
 
             context = new RejAndOlejContext();
+            updateDataGridViews();
         }
 
         private void registerEvents()
@@ -37,7 +40,13 @@ namespace RejAndOlej
 
         public void updateDataGridViews()
         {
+            ICollection<BusFleet> listOilVehicles = context.BusFleets.Where(v => v.OilCheckStatus == Enums.EnChecks.CheckStatuses.NotValid ||
+                v.OilCheckStatus == Enums.EnChecks.CheckStatuses.Nearby).ToList();
+            dataGridViewOilCheckDeadlines.DataSource = FleetMainTableView.GetFleetView(listOilVehicles);
 
+            ICollection<BusFleet> listRegVehicles = context.BusFleets.Where(v => v.RegCheckStatus == Enums.EnChecks.CheckStatuses.NotValid ||
+                v.RegCheckStatus == Enums.EnChecks.CheckStatuses.Nearby).ToList();
+            dataGridViewRegistrationDeadlines.DataSource = FleetMainTableView.GetFleetView(listRegVehicles);
         }
 
         private void CreateTabPage(ToolStripMenuItem item)
@@ -124,5 +133,21 @@ namespace RejAndOlej
             }
 
         }
+
+        private void dataGridViewOilCheckDeadlines_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            var oilChecks = dataGridViewOilCheckDeadlines.DataSource as List<BusFleet>;
+
+            DataGridViewCellStyle style = new DataGridViewCellStyle();
+            style.BackColor = Color.Red;
+
+            if (oilChecks != null)
+            {
+                if (oilChecks[e.RowIndex].OilCheckStatus == Enums.EnChecks.CheckStatuses.NotValid)
+                    dataGridViewOilCheckDeadlines.Rows[e.RowIndex].DefaultCellStyle = style;
+            }
+        }
+
+        
     }
 }

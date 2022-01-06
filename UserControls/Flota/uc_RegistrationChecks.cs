@@ -54,21 +54,34 @@ namespace RejAndOlej.UserControls.Flota
                     var lastCheck = checkslist.Last();
 
                     int? fromLastCheck = (DateTime.Now.Date - lastCheck.DateOfRegCheck.Value.Date).Days;
-                    if (fromLastCheck < lastCheck.FleetVehicle.Bus.DefaultDaysToRegistrationReview)
+                    if (fromLastCheck < lastCheck.FleetVehicle.Bus.DefaultDaysToRegistrationReview && (lastCheck.FleetVehicle.Bus.DefaultDaysToRegistrationReview - fromLastCheck) < 10)
+                    {
+                        labelLeftToNextCheck.ForeColor = Color.Orange;
+                        labelLeftToNextCheck.Text = "Do następnego przeglądu: " + Convert.ToString(lastCheck.FleetVehicle.Bus.DefaultDaysToRegistrationReview - fromLastCheck) + " dni";
+                        lastCheck.FleetVehicle.RegCheckStatus = EnChecks.CheckStatuses.Nearby;
+                        ContextHelpers.SaveModelObject(lastCheck);
+                    }
+                    else if (fromLastCheck < lastCheck.FleetVehicle.Bus.DefaultDaysToRegistrationReview)
                     {
                         labelLeftToNextCheck.ForeColor = Color.Green;
                         labelLeftToNextCheck.Text = "Do następnego przeglądu: " + Convert.ToString(lastCheck.FleetVehicle.Bus.DefaultDaysToRegistrationReview - fromLastCheck) + " dni";
+                        lastCheck.FleetVehicle.RegCheckStatus = EnChecks.CheckStatuses.Valid;
+                        ContextHelpers.SaveModelObject(lastCheck);
                     }
                     else
                     {
                         labelLeftToNextCheck.ForeColor = Color.Red;
                         labelLeftToNextCheck.Text = "Przegląd spóżniony! Przegląd przeterminowany na " + Convert.ToString(fromLastCheck - lastCheck.FleetVehicle.Bus.DefaultDaysToRegistrationReview) + " dni";
+                        lastCheck.FleetVehicle.RegCheckStatus = EnChecks.CheckStatuses.NotValid;
+                        ContextHelpers.SaveModelObject(lastCheck);
                     }
                 }
                 else
                 {
                     labelLeftToNextCheck.ForeColor = Color.Red;
                     labelLeftToNextCheck.Text = "Pojazd jezcze nie ma wprowadzonych przeglądów rejestracyjnych!";
+                    selectedVehicle.RegCheckStatus = EnChecks.CheckStatuses.HasNoCheck;
+                    ContextHelpers.SaveModelObject(selectedVehicle);
                 }
             }
             else

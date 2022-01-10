@@ -42,6 +42,8 @@ namespace RejAndOlej
             this.menuItemListaPojazdow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemPrzegladyRejestracyjne = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemPrzegladyOlejowe = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemMainUsers = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemUser = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlInnerForms = new System.Windows.Forms.TabControl();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControlCheckDeadlines = new System.Windows.Forms.TabControl();
@@ -62,7 +64,8 @@ namespace RejAndOlej
             this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tmenuItemAutobusy,
-            this.menuItemFlota});
+            this.menuItemFlota,
+            this.menuItemMainUsers});
             this.mainMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.MdiWindowListItem = this.tmenuItemAutobusy;
@@ -128,6 +131,21 @@ namespace RejAndOlej
             this.menuItemPrzegladyOlejowe.Size = new System.Drawing.Size(197, 22);
             this.menuItemPrzegladyOlejowe.Tag = "OilChecks";
             this.menuItemPrzegladyOlejowe.Text = "Przeglądy Olejowe";
+            // 
+            // menuItemMainUsers
+            // 
+            this.menuItemMainUsers.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemUser});
+            this.menuItemMainUsers.Name = "menuItemMainUsers";
+            this.menuItemMainUsers.Size = new System.Drawing.Size(86, 19);
+            this.menuItemMainUsers.Text = "Użytkownicy";
+            // 
+            // menuItemUser
+            // 
+            this.menuItemUser.Name = "menuItemUser";
+            this.menuItemUser.Size = new System.Drawing.Size(135, 22);
+            this.menuItemUser.Tag = "User";
+            this.menuItemUser.Text = "Użytkownik";
             // 
             // tabControlInnerForms
             // 
@@ -230,6 +248,7 @@ namespace RejAndOlej
         }
 
         #endregion
+
         private RejAndOlejContext context;
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem tmenuItemAutobusy;
@@ -247,6 +266,8 @@ namespace RejAndOlej
         private DataGridView dataGridViewOilCheckDeadlines;
         private TabPage tabPageRegistrationChecks;
         private DataGridView dataGridViewRegistrationChecksDeadlines;
+        private ToolStripMenuItem menuItemMainUsers;
+        private ToolStripMenuItem menuItemUser;
     }
 }
 

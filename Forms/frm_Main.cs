@@ -1,10 +1,12 @@
 ﻿
 using RejAndOlej.DATABASE;
+using RejAndOlej.Forms;
 using RejAndOlej.Helpers;
 using RejAndOlej.Helpers.Controls;
 using RejAndOlej.Models;
 using RejAndOlej.UserControls.Autobusy;
 using RejAndOlej.UserControls.Flota;
+using RejAndOlej.UserControls.Users;
 using RejAndOlej.Views.TableViews;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,7 @@ namespace RejAndOlej
             menuItemListaPojazdow.Click += (s, e) => CreateTabPage(menuItemListaPojazdow);
             menuItemPrzegladyOlejowe.Click += (s, e) => CreateTabPage(menuItemPrzegladyOlejowe);
             menuItemPrzegladyRejestracyjne.Click += (s, e) => CreateTabPage(menuItemPrzegladyRejestracyjne);
+            menuItemUser.Click += (s, e) => CreateTabPage(menuItemUser);
         }
 
         public void updateDataGridViews()
@@ -80,6 +83,10 @@ namespace RejAndOlej
                         userControl = new uc_RegistrationChecks();
                         openTabsTags.Add(item.Tag);
                         break;
+                    case "User":
+                        userControl = new uc_Users();
+                        openTabsTags.Add(item.Tag);
+                        break;
                 }
 
                 userControl.Dock = DockStyle.Fill;
@@ -99,9 +106,18 @@ namespace RejAndOlej
 
         private void Main_Load(object sender, EventArgs e)
         {
-            tabControlInnerForms.DrawMode = TabDrawMode.OwnerDrawFixed;
-            tabControlInnerForms.Padding = new Point(13, 0);
-            openTabsTags = new List<object>();
+            frm_Login loginForm = new frm_Login();
+            if (loginForm.ShowDialog() == DialogResult.OK)
+            {
+                tabControlInnerForms.DrawMode = TabDrawMode.OwnerDrawFixed;
+                tabControlInnerForms.Padding = new Point(13, 0);
+                openTabsTags = new List<object>();
+            }
+            else
+                this.Close();
+
+            loginForm.Close();
+
         }
 
         private void tabControlInnerForms_MouseClick(object sender, MouseEventArgs e)

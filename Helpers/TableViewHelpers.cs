@@ -1,4 +1,5 @@
 ﻿using RejAndOlej.DATABASE;
+using RejAndOlej.DATABASE.Models;
 using RejAndOlej.Models;
 using RejAndOlej.Views.TableViews;
 using System;
@@ -18,6 +19,7 @@ namespace RejAndOlej.Helpers
             var vehiclesList = modelList as ICollection<BusFleet>;
             var oilChecksList = modelList as ICollection<OilCheck>;
             var regChecksList = modelList as ICollection<RegistrationCheck>;
+            var usersList = modelList as ICollection<User>;
 
             if (busMakersList != null)
             {
@@ -74,6 +76,17 @@ namespace RejAndOlej.Helpers
 
                 return viewList as List<T>;
             }
+            else if (usersList != null)
+            {
+                List<UsersMainTableView> viewList = new List<UsersMainTableView>();
+
+                foreach (var model in usersList)
+                {
+                    viewList.Add(new UsersMainTableView(model));
+                }
+
+                return viewList as List<T>;
+            }
 
 
 
@@ -87,6 +100,7 @@ namespace RejAndOlej.Helpers
             var fleetView = viewList as ICollection<FleetMainTableView>;
             var oilChecksView = viewList as ICollection<OilChecksMainTableView>;
             var regChecksView = viewList as ICollection<RegistrationChecksMainTableView>;
+            var usersView = viewList as ICollection<UsersMainTableView>;
 
             if (busMakersView != null)
             {
@@ -153,6 +167,20 @@ namespace RejAndOlej.Helpers
                     foreach (var view in regChecksView)
                     {
                         returnList.Add(context.RegistrationChecks.Where(b => b.DateOfRegCheck == view.DataPrzegladu && b.FleetVehicle.RegistrationNumber == view.NumerRejestracyjny).FirstOrDefault());
+                    }
+
+                    return returnList;
+                }
+            }
+            else if (usersView != null)
+            {
+                using (RejAndOlejContext context = new RejAndOlejContext())
+                {
+                    List<User> returnList = new List<User>();
+
+                    foreach (var view in usersView)
+                    {
+                        returnList.Add(context.Users.Where(b => b.UserId == view.ID).FirstOrDefault());
                     }
 
                     return returnList;

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using RejAndOlej.DATABASE.Models;
 using RejAndOlej.Models;
 
 #nullable disable
@@ -23,6 +24,7 @@ namespace RejAndOlej.DATABASE
         public virtual DbSet<OilCheck> OilChecks { get; set; }
         public virtual DbSet<RegistrationCheck> RegistrationChecks { get; set; }
         public virtual DbSet<Bus> Buses { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -154,6 +156,27 @@ namespace RejAndOlej.DATABASE
                     .HasForeignKey(d => d.BusMakerId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Buses_BusMakers");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("Users");
+
+                entity.HasKey(e => e.UserId);
+
+                entity.Property(e => e.UserId).HasColumnName("userId");
+
+                entity.Property(e => e.Name).HasMaxLength(10).HasColumnName("name");
+
+                entity.Property(e => e.Surname).HasMaxLength(10).HasColumnName("surname");
+
+                entity.Property(e => e._userGroup).HasColumnName("userGroup").IsRequired(false);
+
+                entity.Property(e => e.Position).HasColumnName("position").IsRequired(false);
+
+                entity.Property(e => e.Login).HasMaxLength(10).HasColumnName("login");
+
+                entity.Property(e => e.Password).HasMaxLength(10).HasColumnName("password");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -1,5 +1,6 @@
 ﻿
 using RejAndOlej.DATABASE;
+using RejAndOlej.DATABASE.Models;
 using System.Windows.Forms;
 
 namespace RejAndOlej.Forms
@@ -133,6 +134,7 @@ namespace RejAndOlej.Forms
 
         #endregion
 
+        private User loginUser;
         private RejAndOlejContext context;
         private System.Windows.Forms.Button sbLogin;
         private System.Windows.Forms.Button sbCancel;

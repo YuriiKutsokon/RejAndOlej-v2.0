@@ -11,7 +11,7 @@ namespace RejAndOlej.Helpers
 {
     class FormHelpers
     {
-        public static void EnableManipulationControls(EnModels.ModelActions action, Control.ControlCollection controls)
+        public static void EnableManipulationControls(EnModels.ModelActions? action, Control.ControlCollection controls)
         {
             switch (action)
             {

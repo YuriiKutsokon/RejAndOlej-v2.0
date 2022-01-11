@@ -129,10 +129,10 @@ namespace RejAndOlej.UserControls.Flota
             // 
             // textBoxMileageOnCheck
             // 
-            this.textBoxMileageOnCheck.Enabled = false;
             this.textBoxMileageOnCheck.Location = new System.Drawing.Point(270, 39);
             this.textBoxMileageOnCheck.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxMileageOnCheck.Name = "textBoxMileageOnCheck";
+            this.textBoxMileageOnCheck.ReadOnly = true;
             this.textBoxMileageOnCheck.Size = new System.Drawing.Size(154, 23);
             this.textBoxMileageOnCheck.TabIndex = 0;
             // 

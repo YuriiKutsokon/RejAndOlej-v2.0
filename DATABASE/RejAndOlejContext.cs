@@ -25,6 +25,11 @@ namespace RejAndOlej.DATABASE
         public virtual DbSet<RegistrationCheck> RegistrationChecks { get; set; }
         public virtual DbSet<Bus> Buses { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserGroup> UserGroups { get; set; }
+        public virtual DbSet<UserPermission> UserPermissions { get; set; }
+        public virtual DbSet<ConnectionGroupsPermissions> ConnectionsGroupsPermissions { get; set; }
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -177,6 +182,43 @@ namespace RejAndOlej.DATABASE
                 entity.Property(e => e.Login).HasMaxLength(10).HasColumnName("login");
 
                 entity.Property(e => e.Password).HasMaxLength(10).HasColumnName("password");
+            });
+
+            modelBuilder.Entity<UserGroup>(entity =>
+            {
+                entity.ToTable("UserGroups");
+
+                entity.HasKey(e => e.GroupId);
+
+                entity.Property(e => e.GroupId).HasColumnName("groupId");
+
+                entity.Property(e => e.Name).HasColumnName("name").IsRequired(false);
+
+            });
+
+            modelBuilder.Entity<UserPermission>(entity =>
+            {
+                entity.ToTable("UserPermissions");
+
+                entity.HasKey(e => e.PermissionId);
+
+                entity.Property(e => e.Name).HasColumnName("permissionId");
+
+                entity.Property(e => e.Text).HasColumnName("name");
+
+            });
+
+            modelBuilder.Entity<ConnectionGroupsPermissions>(entity =>
+            {
+                entity.ToTable("ConnectionGroupsPermissions");
+
+                entity.HasKey(e => e.ConnectionId);
+
+                entity.Property(e => e.ConnectionId).HasColumnName("connectionId");
+
+                entity.Property(e => e.permissionId).HasColumnName("premissionId");
+
+                entity.Property(e => e.groupId).HasColumnName("groupId");
             });
 
             OnModelCreatingPartial(modelBuilder);

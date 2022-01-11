@@ -14,7 +14,11 @@ namespace RejAndOlej.Enums
             BusModels = 2,
             BusFleet = 3,
             OilChecks = 4,
-            RegistrationChecks = 5
+            RegistrationChecks = 5,
+            Users = 6,
+            UserGroups = 7,
+            UserPermissions = 8,
+            ConnectionGroupsPermissions = 9
         }
 
         public enum ModelActions

@@ -9,10 +9,20 @@ namespace RejAndOlej.Helpers.Controls
 {
     class ControlsHelpers
     {
-        public static void EnableControls(Control.ControlCollection controls, bool enabled)
+        public static void EnableControls(Control.ControlCollection controls, bool mode)
         {
             foreach(Control ctrl in controls)
-                ctrl.Enabled = true;
+            {
+                TextBox textBox = ctrl as TextBox;
+                DataGridView dgv = ctrl as DataGridView;
+
+                if (textBox != null)
+                    textBox.ReadOnly = !mode;
+                else if (dgv != null)
+                    dgv.ReadOnly = !mode;
+                else
+                    ctrl.Enabled = mode;
+            }
         }
 
         public static void ClearControls(Control.ControlCollection controls)

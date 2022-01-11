@@ -22,6 +22,8 @@ namespace RejAndOlej.Forms
 
         }
 
+        public User LoginUser { get => loginUser; }
+
         private void frm_Login_Load(object sender, EventArgs e)
         {
             label1.Text = "Zaloguj się do programu Rej&&Olej";
@@ -33,6 +35,7 @@ namespace RejAndOlej.Forms
 
             if (user != null)
             {
+                loginUser = user;
                 DialogResult = DialogResult.OK;
             }
             else

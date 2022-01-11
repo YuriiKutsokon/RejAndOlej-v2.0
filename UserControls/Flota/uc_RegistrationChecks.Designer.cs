@@ -152,7 +152,6 @@ namespace RejAndOlej.UserControls.Flota
             this.groupBoxDataManipulation.Controls.Add(this.label2);
             this.groupBoxDataManipulation.Controls.Add(this.label1);
             this.groupBoxDataManipulation.Controls.Add(this.tbMileageOnCheck);
-            this.groupBoxDataManipulation.Enabled = false;
             this.groupBoxDataManipulation.Location = new System.Drawing.Point(452, 48);
             this.groupBoxDataManipulation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxDataManipulation.Name = "groupBoxDataManipulation";
@@ -175,6 +174,7 @@ namespace RejAndOlej.UserControls.Flota
             // 
             // dateTimeOilCheck
             // 
+            this.dateTimeOilCheck.Enabled = false;
             this.dateTimeOilCheck.Location = new System.Drawing.Point(270, 64);
             this.dateTimeOilCheck.Name = "dateTimeOilCheck";
             this.dateTimeOilCheck.Size = new System.Drawing.Size(154, 23);
@@ -203,6 +203,7 @@ namespace RejAndOlej.UserControls.Flota
             this.tbMileageOnCheck.Location = new System.Drawing.Point(270, 34);
             this.tbMileageOnCheck.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbMileageOnCheck.Name = "tbMileageOnCheck";
+            this.tbMileageOnCheck.ReadOnly = true;
             this.tbMileageOnCheck.Size = new System.Drawing.Size(154, 23);
             this.tbMileageOnCheck.TabIndex = 0;
             // 

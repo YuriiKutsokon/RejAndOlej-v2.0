@@ -1,5 +1,6 @@
 ﻿
 using RejAndOlej.DATABASE;
+using RejAndOlej.DATABASE.Models;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -249,6 +250,7 @@ namespace RejAndOlej
 
         #endregion
 
+        private User currentUser;
         private RejAndOlejContext context;
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem tmenuItemAutobusy;

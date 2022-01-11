@@ -73,9 +73,9 @@ namespace RejAndOlej.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cancel_32 {
+        internal static System.Drawing.Bitmap AddButton_16 {
             get {
-                object obj = ResourceManager.GetObject("cancel_32", resourceCulture);
+                object obj = ResourceManager.GetObject("AddButton-16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,6 +113,16 @@ namespace RejAndOlej.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DeleteButton_16 {
+            get {
+                object obj = ResourceManager.GetObject("DeleteButton-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Edit_256 {
             get {
                 object obj = ResourceManager.GetObject("Edit_256", resourceCulture);
@@ -123,9 +133,9 @@ namespace RejAndOlej.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap OKButton_16 {
+        internal static System.Drawing.Bitmap EditButton_16 {
             get {
-                object obj = ResourceManager.GetObject("OKButton-16", resourceCulture);
+                object obj = ResourceManager.GetObject("EditButton-16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +143,9 @@ namespace RejAndOlej.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap OKButton_32 {
+        internal static System.Drawing.Bitmap OKButton_16 {
             get {
-                object obj = ResourceManager.GetObject("OKButton-32", resourceCulture);
+                object obj = ResourceManager.GetObject("OKButton-16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -156,6 +166,16 @@ namespace RejAndOlej.Properties {
         internal static System.Drawing.Bitmap Save_256 {
             get {
                 object obj = ResourceManager.GetObject("Save_256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SaveButton_16 {
+            get {
+                object obj = ResourceManager.GetObject("SaveButton-16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

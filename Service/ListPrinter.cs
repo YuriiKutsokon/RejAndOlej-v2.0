@@ -20,6 +20,7 @@ namespace RejAndOlej.Service
         private ICollection<BusModelsMainTableView> _dataSourceBusModels;
         private ICollection<OilChecksMainTableView> _dataSourceOilChecks;
         private ICollection<RegistrationChecksMainTableView> _dataSourceRegistrationChecks;
+        private ICollection<UsersMainTableView> _dataSourceUsers;
 
         private string _tableHeader = "";
 
@@ -82,6 +83,18 @@ namespace RejAndOlej.Service
             if (_dataSourceRegistrationChecks != null && _dataSourceRegistrationChecks.Count != 0)
             {
                 _tableHeader = "Data Przeglądu".PadRight(20, ' ') + "Przebieg na moment przeglądu".PadRight(30, ' ');
+            }
+        }
+
+        public ListPrinter(ICollection<UsersMainTableView> dataList)
+        {
+            _dataSourceUsers = dataList;
+
+            _entityType = EnModels.Models.Users;
+
+            if (_dataSourceUsers != null && _dataSourceUsers.Count != 0)
+            {
+                _tableHeader = "Imię".PadRight(15, ' ') + "Nazwisko".PadRight(20, ' ') + "Stanowisko".PadRight(20, ' ');
             }
         }
 
@@ -189,6 +202,22 @@ namespace RejAndOlej.Service
                     foreach (var record in _dataSourceRegistrationChecks)
                     {
                         string newLine = record.DataPrzegladu.Value.Date.ToString().PadRight(30, ' ') + record.PrzebiegNaMomentPrzegladu.PadRight(25, ' ');
+
+                        e.Graphics.DrawString(newLine, new Font("Times New Roman", 12, FontStyle.Regular), Brushes.Black, new PointF(80, y += 30));
+                    }
+                    break;
+
+                case EnModels.Models.Users:
+                    if (_dataSourceUsers == null || _dataSourceUsers.Count == 0)
+                        return;
+
+                    e.Graphics.DrawString("Lista użytkowników", new Font("Times New Romans", 16, FontStyle.Bold), Brushes.Black, new PointF(150, 100));
+
+                    e.Graphics.DrawString(_tableHeader, new Font("Times New Roman", 12, FontStyle.Bold), Brushes.Black, new PointF(80, y += 30));
+
+                    foreach (var record in _dataSourceUsers)
+                    {
+                        string newLine = record.Name.PadRight(15, ' ') + record.Surname.PadRight(20, ' ');// + record.Position.PadRight(20, ' ');
 
                         e.Graphics.DrawString(newLine, new Font("Times New Roman", 12, FontStyle.Regular), Brushes.Black, new PointF(80, y += 30));
                     }

@@ -16,7 +16,11 @@ namespace RejAndOlej.Helpers.Controls
         RejAndOlejModelsBusMaker,
         RejAndOlejModelsBusFleet,
         RejAndOlejModelsOilCheck,
-        RejAndOlejModelsRegistrationCheck
+        RejAndOlejModelsRegistrationCheck,
+        RejAndOlejDATABASEModelsUser,
+        RejAndOlejDATABASEModelsUserGroup,
+        RejAndOlejDATABASEModelsUserPermission,
+        RejAndOlejDATABASEModelsConnectionGroupsPermissions
     }
 
     class GridViewHelpers
@@ -104,6 +108,17 @@ namespace RejAndOlej.Helpers.Controls
                                 .Where(v => v.FleetVehicle.RegistrationNumber ==
                                 Convert.ToString(sender.SelectedCells[0].OwningRow.Cells[nameof(RegistrationChecksMainTableView.NumerRejestracyjny)].Value) &&
                                 v.MileageOnRegCheck == Convert.ToInt64(sender.SelectedCells[0].OwningRow.Cells[nameof(RegistrationChecksMainTableView.PrzebiegNaMomentPrzegladu)].Value)).FirstOrDefault();
+                        }
+                        break;
+
+                    case nameof(ModelTypes.RejAndOlejDATABASEModelsUser):
+                        if (sender.SelectedRows != null && sender.SelectedRows.Count != 0)
+                        {
+                            returnObj = context.Users.Where(e => e.UserId == Convert.ToInt32(sender.SelectedRows[0].Cells[nameof(UsersMainTableView.ID)].Value)).FirstOrDefault();
+                        }
+                        else if (sender.SelectedCells != null && sender.SelectedCells.Count != 0)
+                        {
+                            returnObj = context.Users.Where(e => e.UserId == Convert.ToInt32(sender.SelectedRows[0].Cells[nameof(UsersMainTableView.ID)].Value)).FirstOrDefault();
                         }
                         break;
                 }

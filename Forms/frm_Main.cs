@@ -1,5 +1,6 @@
 ﻿
 using RejAndOlej.DATABASE;
+using RejAndOlej.DATABASE.Models;
 using RejAndOlej.Forms;
 using RejAndOlej.Helpers;
 using RejAndOlej.Helpers.Controls;
@@ -41,6 +42,8 @@ namespace RejAndOlej
             menuItemPrzegladyRejestracyjne.Click += (s, e) => CreateTabPage(menuItemPrzegladyRejestracyjne);
             menuItemUser.Click += (s, e) => CreateTabPage(menuItemUser);
         }
+
+        public User CurrentUser { get => currentUser; }
 
         public void updateDataGridViews()
         {
@@ -84,7 +87,7 @@ namespace RejAndOlej
                         openTabsTags.Add(item.Tag);
                         break;
                     case "User":
-                        userControl = new uc_Users();
+                        userControl = new uc_Users(CurrentUser);
                         openTabsTags.Add(item.Tag);
                         break;
                 }
@@ -112,6 +115,8 @@ namespace RejAndOlej
                 tabControlInnerForms.DrawMode = TabDrawMode.OwnerDrawFixed;
                 tabControlInnerForms.Padding = new Point(13, 0);
                 openTabsTags = new List<object>();
+                currentUser = loginForm.LoginUser;
+                this.Text = $"Rej&Olej | {currentUser.Name.TrimEnd()} {currentUser.Surname.TrimEnd()} ({currentUser.Login.TrimEnd()})";
             }
             else
                 this.Close();

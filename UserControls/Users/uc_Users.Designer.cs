@@ -72,11 +72,15 @@ namespace RejAndOlej.UserControls.Users
             this.dataGridViewUserPermissions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewUserPermissions.Location = new System.Drawing.Point(6, 83);
             this.dataGridViewUserPermissions.Name = "dataGridViewUserPermissions";
-            this.dataGridViewUserPermissions.ReadOnly = true;
             this.dataGridViewUserPermissions.RowTemplate.Height = 25;
             this.dataGridViewUserPermissions.Size = new System.Drawing.Size(502, 262);
             this.dataGridViewUserPermissions.TabIndex = 0;
             this.dataGridViewUserPermissions.Tag = "Users";
+            this.dataGridViewUserPermissions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUserPermissions_CellContentClick);
+            this.dataGridViewUserPermissions.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUserPermissions_CellEndEdit);
+            this.dataGridViewUserPermissions.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewUserPermissions_CellMouseUp);
+            this.dataGridViewUserPermissions.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUserPermissions_CellValueChanged);
+            this.dataGridViewUserPermissions.CellValuePushed += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.dataGridViewUserPermissions_CellValuePushed);
             // 
             // groupBoxUserData
             // 
@@ -220,6 +224,7 @@ namespace RejAndOlej.UserControls.Users
             // 
             // buttonDeleteUserGroup
             // 
+            this.buttonDeleteUserGroup.Enabled = false;
             this.buttonDeleteUserGroup.Image = global::RejAndOlej.Properties.Resources.DeleteButton_16;
             this.buttonDeleteUserGroup.Location = new System.Drawing.Point(481, 354);
             this.buttonDeleteUserGroup.Name = "buttonDeleteUserGroup";
@@ -229,12 +234,14 @@ namespace RejAndOlej.UserControls.Users
             // 
             // buttonSaveUserGroup
             // 
+            this.buttonSaveUserGroup.Enabled = false;
             this.buttonSaveUserGroup.Image = global::RejAndOlej.Properties.Resources.SaveButton_16;
             this.buttonSaveUserGroup.Location = new System.Drawing.Point(448, 354);
             this.buttonSaveUserGroup.Name = "buttonSaveUserGroup";
             this.buttonSaveUserGroup.Size = new System.Drawing.Size(27, 25);
             this.buttonSaveUserGroup.TabIndex = 5;
             this.buttonSaveUserGroup.UseVisualStyleBackColor = true;
+            this.buttonSaveUserGroup.Click += new System.EventHandler(this.buttonSaveUserGroup_Click);
             // 
             // buttonEditUserGroup
             // 
@@ -244,6 +251,7 @@ namespace RejAndOlej.UserControls.Users
             this.buttonEditUserGroup.Size = new System.Drawing.Size(27, 25);
             this.buttonEditUserGroup.TabIndex = 4;
             this.buttonEditUserGroup.UseVisualStyleBackColor = true;
+            this.buttonEditUserGroup.Click += new System.EventHandler(this.buttonEditUserGroup_Click);
             // 
             // buttonAddNewUserGroup
             // 
@@ -253,6 +261,7 @@ namespace RejAndOlej.UserControls.Users
             this.buttonAddNewUserGroup.Size = new System.Drawing.Size(27, 25);
             this.buttonAddNewUserGroup.TabIndex = 3;
             this.buttonAddNewUserGroup.UseVisualStyleBackColor = true;
+            this.buttonAddNewUserGroup.Click += new System.EventHandler(this.buttonAddNewUserGroup_Click);
             // 
             // label6
             // 
@@ -311,6 +320,7 @@ namespace RejAndOlej.UserControls.Users
             // toolStripButtonSave
             // 
             this.toolStripButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonSave.Enabled = false;
             this.toolStripButtonSave.Image = global::RejAndOlej.Properties.Resources.Save_256;
             this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSave.Name = "toolStripButtonSave";
@@ -376,6 +386,9 @@ namespace RejAndOlej.UserControls.Users
 
         #endregion
 
+        private const string strUser = "User";
+        private const string strUserGroup = "UserGroup";
+        private string activeModel;
         private User currentUser;
         private RejAndOlejContext context;
         private System.Windows.Forms.DataGridView dataGridViewUserPermissions;

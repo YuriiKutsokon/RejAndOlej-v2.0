@@ -202,9 +202,11 @@ namespace RejAndOlej.DATABASE
 
                 entity.HasKey(e => e.PermissionId);
 
-                entity.Property(e => e.Name).HasColumnName("permissionId");
+                entity.Property(e => e.PermissionId).HasColumnName("permissionId");
 
-                entity.Property(e => e.Text).HasColumnName("name");
+                entity.Property(e => e.Name).HasColumnName("name").HasColumnType("varchar(50)").IsRequired(false);
+
+                entity.Property(e => e.Text).HasColumnName("text").HasColumnType("ntext").IsRequired(false);
 
             });
 
@@ -214,11 +216,17 @@ namespace RejAndOlej.DATABASE
 
                 entity.HasKey(e => e.ConnectionId);
 
-                entity.Property(e => e.ConnectionId).HasColumnName("connectionId");
+                entity.Property(e => e.ConnectionId).HasColumnName("connectionId").ValueGeneratedNever();
 
                 entity.Property(e => e.permissionId).HasColumnName("premissionId");
 
                 entity.Property(e => e.groupId).HasColumnName("groupId");
+
+                entity.HasOne(b => b.Group).WithMany(d => d.Connections).HasForeignKey(b => b.groupId).OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_ConnectionGroupsPermissions_UserPermissions");
+
+                entity.HasOne(b => b.Permission).WithMany(d => d.Connections).HasForeignKey(b => b.permissionId).OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_ConnectionGroupsPermissions_UserGroups");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -37,9 +37,12 @@ namespace RejAndOlej.UserControls.Users
 
         private void updateDataGridView()
         {
-            //ICollection<User> usersList = context.Users.ToList();
-            //List<UsersMainTableView> viewList = TableViewHelpers.GetView<UsersMainTableView>(usersList);
-            //dataGridViewUserPermissions.DataSource = viewList;
+           if (currentUser != null && currentUser._userGroup != null)
+           {
+                var permissionList = currentUser.UserGroup.Permissions;
+                var viewList = TableViewHelpers.GetView<PermissionsMaintablwView>(permissionList);
+                dataGridViewUserPermissions.DataSource = viewList;
+            }
         }
 
         private void initManipulationControls()
@@ -51,9 +54,13 @@ namespace RejAndOlej.UserControls.Users
                 textBoxPosition.Text = currentUser.Position;
                 textBoxLogin.Text = currentUser.Login;
                 textBoxPassword.Text = currentUser.Password;
-                if (currentUser._userGroup != null)
+                if (currentUser._userGroup != null && currentUser._userGroup >= 0)
+                {
                     comboBoxUserGroup.SelectedIndex = (int)currentUser._userGroup;
-
+                    textBoxUserGroupName.Text = context.UserGroups.Where(ug => ug.GroupId == currentUser._userGroup).FirstOrDefault().Name;
+                }
+                else
+                    textBoxUserGroupName.Text = string.Empty;
             }
             ControlCollection controls = groupBoxUserData.Controls;
             ControlsHelpers.EnableControls(controls, false);
@@ -64,6 +71,8 @@ namespace RejAndOlej.UserControls.Users
             ControlCollection controls = groupBoxUserData.Controls;
             DBAction = EnModels.ModelActions.Insert;
             FormHelpers.EnableManipulationControls(DBAction, controls);
+            activeModel = strUser;
+            toolStripButtonSave.Enabled = true;
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
@@ -71,11 +80,13 @@ namespace RejAndOlej.UserControls.Users
             ControlCollection controls = groupBoxUserData.Controls;
             DBAction = EnModels.ModelActions.Edit;
             FormHelpers.EnableManipulationControls(DBAction, controls);
+            activeModel = strUser;
+            toolStripButtonSave.Enabled = true;
         }
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
         {
-            if (DBAction != null)
+            if (DBAction != null && activeModel == strUser)
             {
                 if (DBAction == EnModels.ModelActions.Edit)
                 {
@@ -92,7 +103,13 @@ namespace RejAndOlej.UserControls.Users
                 }
                 else if (DBAction == EnModels.ModelActions.Insert)
                 {
-                    int newUserId = context.Users.Count();
+                    int newUserId;
+
+                    if (context.Users.Any())
+                        newUserId = context.Users.OrderBy(u => u.UserId).Last().UserId + 1;
+                    else
+                        newUserId = 0;
+
                     using (RejAndOlejContext tempContext = new RejAndOlejContext())
                     {
                         User user = new User()
@@ -114,6 +131,7 @@ namespace RejAndOlej.UserControls.Users
 
                     initManipulationControls();
                 }
+                
             }
         }
 
@@ -165,6 +183,111 @@ namespace RejAndOlej.UserControls.Users
             }
             else
                 MessageBox.Show("Brak danych do wydruku!");
+        }
+
+        private void buttonAddNewUserGroup_Click(object sender, EventArgs e)
+        {
+            DBAction = EnModels.ModelActions.Insert;
+            textBoxUserGroupName.Text = string.Empty;
+            textBoxUserGroupName.ReadOnly = false;
+            activeModel = strUserGroup;
+            buttonSaveUserGroup.Enabled = true;
+        }
+
+        private void buttonEditUserGroup_Click(object sender, EventArgs e)
+        {
+            DBAction = EnModels.ModelActions.Edit;
+            ControlCollection controls = groupBoxUserGroup.Controls;
+            FormHelpers.EnableManipulationControls(DBAction, controls);
+            activeModel = strUserGroup;
+            buttonSaveUserGroup.Enabled = true;
+        }
+
+        private void buttonSaveUserGroup_Click(object sender, EventArgs e)
+        {
+            int userGroupId;
+
+            if (context.UserGroups.Count() > 0)
+                userGroupId = context.UserGroups.OrderBy(g => g.GroupId).Last().GroupId + 1;
+            else
+                userGroupId = 0;
+
+            if (DBAction != null && activeModel == strUserGroup)
+            {
+                if (DBAction == EnModels.ModelActions.Insert)
+                {
+                    using (RejAndOlejContext tempContext = new RejAndOlejContext())
+                    {
+                        UserGroup group = new UserGroup();
+
+                        group.GroupId = userGroupId;
+                        group.Name = textBoxUserGroupName.Text;
+                       
+                        tempContext.UserGroups.Add(group);
+                        tempContext.SaveChanges();
+                    }
+                }
+                buttonSaveUserGroup.Enabled = false;
+                updateDataGridView();
+            }
+        }
+
+        private void dataGridViewUserPermissions_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            
+        }
+
+        private void dataGridViewUserPermissions_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int conId;
+
+            if (context.ConnectionsGroupsPermissions.Any())
+                conId = context.ConnectionsGroupsPermissions.OrderBy(c => c.ConnectionId).Last().ConnectionId + 1;
+            else
+                conId = 0;
+
+            if (e.ColumnIndex == 0)
+            {
+                if ((bool)dataGridViewUserPermissions.CurrentCell.Value)
+                {
+                    ConnectionGroupsPermissions newGPConnection = new ConnectionGroupsPermissions()
+                    {
+                        ConnectionId = conId,
+                        permissionId = e.RowIndex,
+                        groupId = currentUser.UserGroup.GroupId
+                    };
+
+                    using (RejAndOlejContext tempContext = new RejAndOlejContext())
+                    {
+                        tempContext.ConnectionsGroupsPermissions.Add(newGPConnection);
+                        tempContext.SaveChanges();
+                    }
+                }
+                else
+                {
+                    ConnectionGroupsPermissions connection = context.ConnectionsGroupsPermissions.Where(con => con.permissionId == e.ColumnIndex &&
+                    con.groupId == currentUser.UserGroup.GroupId).FirstOrDefault();
+
+                    context.Remove(connection);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        private void dataGridViewUserPermissions_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            
+
+        }
+
+        private void dataGridViewUserPermissions_CellValuePushed(object sender, DataGridViewCellValueEventArgs e)
+        {
+            
+        }
+
+        private void dataGridViewUserPermissions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridViewUserPermissions.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
     }
 }

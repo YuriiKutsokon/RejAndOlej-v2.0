@@ -41,6 +41,7 @@ namespace RejAndOlej
             menuItemPrzegladyOlejowe.Click += (s, e) => CreateTabPage(menuItemPrzegladyOlejowe);
             menuItemPrzegladyRejestracyjne.Click += (s, e) => CreateTabPage(menuItemPrzegladyRejestracyjne);
             menuItemUser.Click += (s, e) => CreateTabPage(menuItemUser);
+            menuItemRoutingCards.Click += (s, e) => CreateTabPage(menuItemRoutingCards);
         }
 
         public User CurrentUser { get => currentUser; }
@@ -88,6 +89,10 @@ namespace RejAndOlej
                         break;
                     case "User":
                         userControl = new uc_Users(CurrentUser);
+                        openTabsTags.Add(item.Tag);
+                        break;
+                    case "RoutingCards":
+                        userControl = new uc_RoutingCards();
                         openTabsTags.Add(item.Tag);
                         break;
                 }

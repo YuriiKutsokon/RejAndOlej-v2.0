@@ -52,6 +52,7 @@ namespace RejAndOlej
             this.dataGridViewOilCheckDeadlines = new System.Windows.Forms.DataGridView();
             this.tabPageRegistrationChecks = new System.Windows.Forms.TabPage();
             this.dataGridViewRegistrationChecksDeadlines = new System.Windows.Forms.DataGridView();
+            this.menuItemRoutingCards = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.tabControlCheckDeadlines.SuspendLayout();
             this.tabPageOilChecks.SuspendLayout();
@@ -107,7 +108,8 @@ namespace RejAndOlej
             this.menuItemFlota.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemListaPojazdow,
             this.menuItemPrzegladyRejestracyjne,
-            this.menuItemPrzegladyOlejowe});
+            this.menuItemPrzegladyOlejowe,
+            this.menuItemRoutingCards});
             this.menuItemFlota.Name = "menuItemFlota";
             this.menuItemFlota.Size = new System.Drawing.Size(45, 19);
             this.menuItemFlota.Text = "Flota";
@@ -222,6 +224,13 @@ namespace RejAndOlej
             this.dataGridViewRegistrationChecksDeadlines.TabIndex = 0;
             this.dataGridViewRegistrationChecksDeadlines.Paint += new System.Windows.Forms.PaintEventHandler(this.dataGridViewRegistrationChecksDeadlines_Paint);
             // 
+            // menuItemRoutingCards
+            // 
+            this.menuItemRoutingCards.Name = "menuItemRoutingCards";
+            this.menuItemRoutingCards.Size = new System.Drawing.Size(197, 22);
+            this.menuItemRoutingCards.Tag = "RoutingCards";
+            this.menuItemRoutingCards.Text = "Karty Drogowe";
+            // 
             // frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -270,6 +279,7 @@ namespace RejAndOlej
         private DataGridView dataGridViewRegistrationChecksDeadlines;
         private ToolStripMenuItem menuItemMainUsers;
         private ToolStripMenuItem menuItemUser;
+        private ToolStripMenuItem menuItemRoutingCards;
     }
 }
 

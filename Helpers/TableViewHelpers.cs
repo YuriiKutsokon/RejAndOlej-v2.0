@@ -20,12 +20,13 @@ namespace RejAndOlej.Helpers
             var oilChecksList = modelList as ICollection<OilCheck>;
             var regChecksList = modelList as ICollection<RegistrationCheck>;
             var usersList = modelList as ICollection<User>;
+            var permissionsList = modelList as ICollection<UserPermission>;
 
             if (busMakersList != null)
             {
                 List<BusMakersMainTableView> viewList = new List<BusMakersMainTableView>();
 
-                foreach(var model in busMakersList)
+                foreach (var model in busMakersList)
                 {
                     viewList.Add(new BusMakersMainTableView(model));
                 }
@@ -87,6 +88,17 @@ namespace RejAndOlej.Helpers
 
                 return viewList as List<T>;
             }
+            else if (permissionsList != null)
+            {
+                List<PermissionsMaintablwView> viewList = new List<PermissionsMaintablwView>();
+
+                foreach (var model in permissionsList)
+                {
+                    viewList.Add(new PermissionsMaintablwView(model));
+                }
+
+                return viewList as List<T>;
+            }
 
 
 
@@ -101,6 +113,7 @@ namespace RejAndOlej.Helpers
             var oilChecksView = viewList as ICollection<OilChecksMainTableView>;
             var regChecksView = viewList as ICollection<RegistrationChecksMainTableView>;
             var usersView = viewList as ICollection<UsersMainTableView>;
+            var permissionsView = viewList as ICollection<PermissionsMaintablwView>;
 
             if (busMakersView != null)
             {
@@ -184,6 +197,18 @@ namespace RejAndOlej.Helpers
                     }
 
                     return returnList;
+                }
+            }
+            else if (permissionsView != null)
+            {
+                using (RejAndOlejContext context = new RejAndOlejContext())
+                {
+                    List<UserPermission> returnList = new List<UserPermission>();
+
+                    foreach(var view in usersView)
+                    {
+                        returnList.Add(context.UserPermissions.Where(p => p.Name == view.Name).FirstOrDefault());
+                    }
                 }
             }
 
